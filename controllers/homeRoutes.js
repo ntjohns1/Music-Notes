@@ -29,4 +29,14 @@ router.get('/signup', async (req, res) => {
     res.render('signup');
   });
 
+
+  router.get('/logout', async (req, res) => {
+    if (req.session.logged_in) {
+      res.render('portal')
+      return;
+    }
+  
+    res.render('homepage');
+  });
+
 module.exports = router;
