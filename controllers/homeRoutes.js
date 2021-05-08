@@ -20,4 +20,13 @@ router.get('/login', async (req, res) => {
   res.render('login');
 });
 
+router.get('/signup', async (req, res) => {
+    if (req.session.logged_in) {
+      res.render('portal')
+      return;
+    }
+  
+    res.render('signup');
+  });
+
 module.exports = router;
