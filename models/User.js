@@ -1,14 +1,13 @@
-const { type } = require('node:os');
+// const { type } = require('node:os');
 const {Model, DataTypes} = require('sequelize');
 const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');
 
-class Student extends Model {}
+class User extends Model {}
 
-//id, first_name, last_name, username, email, password
-Student.init(
+User.init(
     {
-        student_id: {
+        user_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true,
@@ -43,6 +42,7 @@ Student.init(
             validate: {
                 len: 15,
                 isDecimal: true,
+                isAlphanumeric: true,
             },
         },
         email: {
@@ -52,12 +52,9 @@ Student.init(
                 isEmail: true,
             },
         },
-        teacher_id: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'teacher',
-                key: 'id',
-            },
+        is_teacher: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false,
         },
     },
     {
@@ -65,8 +62,8 @@ Student.init(
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'student'
+        modelName: 'user'
     }
 );
 
-module.exports = Student;
+module.exports = User;
