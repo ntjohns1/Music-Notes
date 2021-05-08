@@ -2,12 +2,17 @@ const router = require('express').Router();
 const { User } = require('../../models');
 
 router.post('/signup', async (req, res) => {
+  //console.log('Signup Route is hit.')
   try {
     const userData = await User.create({
-      name: req.body.username,
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
+      username: req.body.username,
       email: req.body.email,
-      password: req.body.password
+      password: req.body.password,
+      is_Teacher: req.body.is_Teacher,
     });
+    console.log(userData)
 
     req.session.save(() => {
       req.session.user_id = userData.id;
@@ -21,9 +26,10 @@ router.post('/signup', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
+  //console.log('Login Route is hit.')
   try {
     const userData = await User.findOne({ where: { email: req.body.email } });
-
+    //console.log(userData)
     if (!userData) {
       res
         .status(400)
@@ -32,7 +38,7 @@ router.post('/login', async (req, res) => {
     }
 
     const validPassword = await userData.checkPassword(req.body.password);
-
+    console.log(validPassword)
     if (!validPassword) {
       res
         .status(400)
@@ -53,6 +59,7 @@ router.post('/login', async (req, res) => {
 });
 
 router.post('/logout', (req, res) => {
+  console.log('logout route hit')
   if (req.session.logged_in) {
     req.session.destroy(() => {
       res.status(204).end();

@@ -6,12 +6,13 @@ const signUpFormHandler = async (event) => {
     const username = document.querySelector('#username-signup').value.trim();
     const email = document.querySelector('#email-signup').value.trim();
     const password = document.querySelector('#password-signup').value.trim();
-    const isTeacher = document.querySelector('#isTeacher-signup').value;//userType needs to be a BOOLEAN
+    const is_Teacher = document.querySelector('#isTeacher-signup').value;//userType needs to be a BOOLEAN
 
-    if (first_name && last_name && username && email && password && isTeacher) {
-        const response = await fetch('/api/users/', {
+    if (first_name && last_name && username && email && password && is_Teacher) {
+        console.log(first_name , last_name , username , email , password , is_Teacher )
+        const response = await fetch('/api/user/signup', {
             method: 'POST',
-            body: JSON.stringify({ first_name, last_name, username, email, password, isTeacher}),
+            body: JSON.stringify({ first_name, last_name, username, email, password, is_Teacher}),
             headers: { 'Content-Type': 'application/json' },
         })
         if(response.ok) {
@@ -20,8 +21,6 @@ const signUpFormHandler = async (event) => {
             alert('Failed to sign up')// change to a modal
         }
     }
-
-    
 }
 
 document
