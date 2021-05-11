@@ -17,7 +17,7 @@ router.get('/students', async (req, res) => {
         return;
     }
     
-    res.render('homepage');
+    res.render('login');
 });
 
 router.get('/schedule', async (req, res) => {

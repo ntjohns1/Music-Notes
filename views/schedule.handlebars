@@ -1,29 +1,41 @@
-<div class="row bg-light p-3">
-<!--Portal Nav-->
-    <ul class="nav nav-tabs">
-    <li class="nav-item">
-        <a class="nav-link text-black-50" href="/portal">Portal Home</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-black-50" href="/students">Manage Students</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link active text-black" aria-current="page" href="/schedule">Manage Schedule</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-black-50" href="/comments" > Lesson Comments</a>
-    </li>
-    </ul>
+<div class="bg-light p-3">
+    <!--Portal Nav-->
+    <div class>
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link text-black-50" href="/portal">Portal Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-black-50" href="/portal/students">Manage Students</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active text-black" aria-current="page" href="/portal/schedule">Manage Schedule</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-black-50" href="/portal/comments" > Lesson Comments</a>
+            </li>
+        </ul>
+    </div>
 
-<!--Portal Content-->
+    <!--Portal Content-->
     <div class="my-4">
         <h3>Welcome to Schedule Management!</h3>
+            <!--Get Students-->
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Open this select menu</option>
+                <option value="1">Student Name</option>
+                <option value="2">Student Name 2</option>
+                <option value="3">Student Name 3</option>
+            </select>
+            
             <!-- We need a form or series of forms that can do the following things:
             Drop down list of existing students:  STUDENT NAMES (get req)
             View existing lessons: get req
             Add a lesson for selected student: post req
             Change an existing lesson: put req
             Cancel a lesson: delete req
+
+            We also need a javascript to manage the event listener action
             -->
 
     </div>
