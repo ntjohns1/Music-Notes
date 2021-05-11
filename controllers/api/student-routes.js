@@ -67,7 +67,7 @@ router.delete('/:id', async (req, res) => {
         });
 
         if (!userData) {
-            res.status(404).json({ message: 'No studet=nt found with that id!' });
+            res.status(404).json({ message: 'No student found with that id!' });
             return;
         }
 
