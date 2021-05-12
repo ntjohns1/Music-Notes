@@ -13,6 +13,7 @@ router.get('/', async (req, res) => {
 
 router.get('/login', async (req, res) => {
   if (req.session.logged_in) {
+    
     res.render('portal')
     return;
   }

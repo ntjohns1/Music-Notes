@@ -8,13 +8,15 @@ const loginFormHandler = async (event) => {
 
   if (email && password) {
     // TODO: Add a comment describing the functionality of this expression
-    const response = await fetch('/api/user/login', {
+    const response = await fetch('/api/user/login', { //make sure this login route is sending back the user data
       method: 'POST',
       body: JSON.stringify({ email, password }),
       headers: { 'Content-Type': 'application/json' },
     });
 
     if (response.ok) {
+      const data = response.json();
+      //localstorage.setItem ... data.data.user gets the user info
       document.location.replace('/');
     } else {
       alert('Failed to log in');

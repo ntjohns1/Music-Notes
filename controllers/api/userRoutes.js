@@ -51,6 +51,7 @@ router.post('/login', async (req, res) => {
       req.session.logged_in = true;
       
       res.json({ user: userData, message: 'You are now logged in!' });
+      //find a way to exclude the password from being sent back to the front end
     });
 
   } catch (err) {
