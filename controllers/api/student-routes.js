@@ -43,7 +43,7 @@ router.put('/:id', async (req, res) => {
     try {
         const userData = await User.update(req.body, {
             where: {
-                user_id: req.params.id,
+                id: req.params.id,
             },
         });
 
@@ -62,7 +62,7 @@ router.delete('/:id', async (req, res) => {
     try {
         const userData = await User.destroy({
             where: {
-                user_id: req.params.id,
+                id: req.params.id,
             },
         });
 
