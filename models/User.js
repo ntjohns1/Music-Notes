@@ -1,4 +1,3 @@
-// const { type } = require('node:os');
 const { Model, DataTypes } = require('sequelize');
 const bcrypt = require('bcrypt');
 const sequelize = require('../config/connection');
@@ -11,7 +10,7 @@ class User extends Model {
 
 User.init(
     {
-        user_id: {
+        id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true,
@@ -37,7 +36,6 @@ User.init(
             unique: true,
             validate: {
                 len: 6,
-                //isDecimal: true,
             },
         },
         password: {

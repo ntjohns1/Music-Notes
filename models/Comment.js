@@ -24,7 +24,7 @@ Comment.init(
             allowNull: false,
             references: {
                 model: 'user',
-                key: 'user_id',
+                key: 'id',
             },
         },
         teacher_id: {
@@ -32,7 +32,7 @@ Comment.init(
             allowNull: false,
             references: {
                 model: 'user',
-                key: 'user_id',
+                key: 'id',
             },
         },
     },

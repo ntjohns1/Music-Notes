@@ -1,14 +1,13 @@
-// const { ReadStream } = require('node:fs');
 const User = require('./User');
 const Comment = require('./Comment');
 
 User.hasMany(Comment, {
-    foreignKey: 'user_id',
+    foreignKey: 'userId',
     onDelete: 'CASCADE',
 });
 
 Comment.belongsTo(User, {
-    foreignKey: 'user_id',
+    foreignKey: 'userId',
 });
 
 module.exports = { User, Comment };
