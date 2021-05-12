@@ -29,6 +29,15 @@ router.get('/schedule', async (req, res) => {
     res.render('login');
 });
 
+router.get('/calendar', async (req, res) => {
+    if (req.session.logged_in) {
+        res.render('calendar')
+        return;
+    }
+    
+    res.render('login');
+});
+
 router.get('/comments', async (req, res) => {
   if (req.session.logged_in) {
     res.render('comment')
