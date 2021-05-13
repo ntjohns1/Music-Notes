@@ -33,6 +33,7 @@
         <select id="userSelect" class="form-select" aria-label="Select a Student">
             {{#each users as |user|}}
             <option>
+                {{user.id}}
                 {{user.first_name}}
                 {{user.last_name}}
             </option>
@@ -63,15 +64,6 @@
     </div>
 
 </div>
-<!--
-    -form select for students
-    -create button for form-select
-    -user hits "go" app shows add comment section and hides dropdown
-      -event listener for button
-      -function to hide/show appropriate page content
-    -page script needs to fetch the comments for that student and populate the UI with them (id=commentHistory)
-    -add event listeners to edit and delete buttons on comment history
-    -->
 
 <!--
     When the route for this page is hit, we can send along the list of students. that will be used to populate the drop down. to view all existing students.

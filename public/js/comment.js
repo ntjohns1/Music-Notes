@@ -9,16 +9,15 @@ const { findAll } = require('../../models/User');
 const selectStudent = async (event) => {
     event.preventDefault();
     const student = document.querySelector('#userSelect').value.trim();
-    document.querySelector('#userSelect').setAttribute('hidden', true);
-    document.querySelector('#manageComments').removeAttribute('hidden');
-    const  commentData = await Comment.findAll().catch((err) => {
+
+    // figure out how to grab the id for the selected user
+    // document.querySelector('#userSelect').setAttribute('hidden', true);
+    // document.querySelector('#manageComments').removeAttribute('hidden');
+    const commentData = await Comment.findAll().catch((err) => {
         res.json(err);
-      });
-      const comments = commentData.filter(comments => commentData.student_id === ))
-
-
-    // fetch comments for student 
-    // 
+    });
+    // filter the comments where user id we grabbed === Comment.student_id
+    // create the elements using the bootstrap components on lines 53 through 61 of the comment.handlebars file
 }
 
 const viewComments = async (event) => {
