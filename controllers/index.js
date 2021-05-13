@@ -5,6 +5,5 @@ const portalRoutes = require('./portalRoutes.js')
 
 router.use('/', homeRoutes);
 router.use('/api', apiRoutes);
-router.use('/portal', portalRoutes)
 
 module.exports = router
