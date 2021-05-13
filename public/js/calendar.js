@@ -1,55 +1,106 @@
-require('dotenv').config();
 const {google} = require('googleapis');
-const {OAuth2} = google.auth;
-const OAuth2Client = new OAuth2('', '');
-const calendar = google.calendar({version: 'v3', auth: OAuth2Client});
+require('dotenv').config();
 
-OAuth2Client.setCredentials({refresh_token: ''});
+// Provide the required configuration
+const CREDENTIALS = JSON.parse(process.env.CREDENTIALS);
+const calendarId = process.env.CALENDAR_ID;
 
-//Below is hard-coded event creator. Will need to make it dynamic. This is just testing material to make sure we can do it. It does work. 
-const eventStartTime = new Date();
+// Google calendar API settings
+const SCOPES = 'https://www.googleapis.com/auth/calendar';
+const calendar = google.calendar({version : "v3"});
 
-eventStartTime.setDate(eventStartTime.getDay() + 3);
+const auth = new google.auth.JWT(
+    CREDENTIALS.client_email,
+    null,
+    CREDENTIALS.private_key,
+    SCOPES
+);
 
-const eventEndTime = new Date();
+// Your TIMEOFFSET Offset
+const TIMEOFFSET = '+05:30';
 
-eventEndTime.setDate(eventEndTime.getDay() + 3);
-eventEndTime.setMinutes(eventEndTime.getMinutes() + 45);
+// Get date-time string for calender
+// const dateTimeForCalander = () => {
 
-const event = {
-    summary: 'Test Meeting',
-    description: 'Test Meeting for Project 10 from NodeJS',
-    start: {
-        dateTime: eventStartTime,
-        timeZone: 'America/Denver',
-    },
-    end: {
-        dateTime: eventEndTime,
-        timeZone: 'America/Denver',
-    },
-    colorId: 1,
-};
+//     let date = new Date();
 
-calendar.freebusy.query({
-    resource: {
-        timeMin: eventStartTime,
-        timeMax: eventEndTime,
-        timeZone: 'America/Denver',
-        items: [{id: 'primary'}],
-    },
-}, (err, res) => {
-    if (err) return console.error('Free Busy Query Error', err);
+//     let year = 2021;
+
+//     let month = 05;
+//     if (month < 10) {
+//         month = `0${month}`;
+//     }
+
+//     let day = 12;
+//     if (day < 10) {
+//         day = `0${day}`;
+//     }
+//     let hour = 18;
+//     if (hour < 10) {
+//         hour = `0${hour}`;
+//     }
+//     let minute = 15;
+//     if (minute < 10) {
+//         minute = `0${minute}`;
+//     }
+
+//     let newDateTime = `${year}-${month}-${day}T${hour}:${minute}:00.000${TIMEOFFSET}`;
+
+//     let event = new Date(Date.parse(newDateTime));
+
+//     let startDate = event;
+//     // Delay in end time is 1
+//     let endDate = new Date(new Date(startDate).setHours(startDate.getHours()+1));
+
+//     return {
+//         'start': startDate,
+//         'end': endDate
+//     }
+// };
+
+// // Insert new event to Google Calendar
+// const insertEvent = async (event) => {
+
+//     try {
+//         let response = await calendar.events.insert({
+//             auth: auth,
+//             calendarId: calendarId,
+//             resource: event
+//         });
     
-    const eventsArr = res.data.calendars.primary.busy;
+//         if (response['status'] == 200 && response['statusText'] === 'OK') {
+//             return 1;
+//         } else {
+//             return 0;
+//         }
+//     } catch (error) {
+//         console.log(`Error at insertEvent --> ${error}`);
+//         return 0;
+//     }
+// };
 
-    if (eventsArr.length === 0) return calendar.events.insert({
-        calendarId: 'primary',
-        resource: event
-    }, (err) => {
-        if (err) return console.error("Calendar Event Creation Error: ", err);
+// let dateTime = dateTimeForCalander();
 
-        return console.log('Calendar Event Created');
-    })
+// // Event for Google Calendar
+// let event = {
+//     'summary': `This is the summary.`,
+//     'description': `This is the description.`,
+//     'start': {
+//         'dateTime': dateTime['start'],
+//         'timeZone': 'America/Chicago'
+//     },
+//     'end': {
+//         'dateTime': dateTime['end'],
+//         'timeZone': 'America/Chicago'
+//     }
+// };
 
-    return console.log('Sorry, I am busy');
-});
+// insertEvent(event)
+//     .then((res) => {
+//         console.log(res);
+//     })
+//     .catch((err) => {
+//         console.log(err);
+//     });
+
+
