@@ -29,25 +29,49 @@
                 Edit an existing comment: put req
                 Delete a comment: delete req
             -->
-            {{!-- to do: get req to poulate students --}}
-        <select class="form-select" aria-label="Default select example">
-            <option selected>Open this select menu</option>
-            <option value="1">Student Name</option>
+        {{!-- helper to populates a list of users (need to figure out how to limit to isTeacher: false) --}}
+        <select id="userSelect" class="form-select" aria-label="Select a Student">
+            {{#each users as |user|}}
+            <option>
+                {{user.first_name}}
+                {{user.last_name}}
+            </option>
+            {{/each}}
             <!--Grab the student id from the value-->
-            <option value="2">Student Name 2</option>
-            <option value="3">Student Name 3</option>
         </select>
-        {{!-- to do: get req to populate comment history --}}
+        <button id="userSelectBtn" type="submit" class="btn btn-info">GO</button>
         {{!-- to do: change alert in public comment.js to modal --}}
-        <div class="form-group">
+        <div id="addComment" class="form-group">
             <label for="commentTextarea">Add a Comment</label>
             <textarea class="form-control" id="commentTextarea" rows="3"></textarea>
-
+            <button id="addCommentBtn" type="submit" class="btn btn-info">SEND</button>
+        </div>
+        {{!-- use #each helper to populate lines with comment history --}}
+        <div id="manageComments" class="input-group">
+            {{#each comments as |comment|}}
+            <textarea class="form-control">
+                {{comment.date}}
+                {{comment.content}}
+                </textarea>
+            <div class="input-group-append">
+                <button class="badge badge-pill badge-info p-4" type="button">EDIT</button>
+                <button class="badge badge-pill badge-danger p-4" type="button">DELETE</button>
+            </div>
+             {{/each}}
         </div>
 
     </div>
 
 </div>
+<!--
+    -form select for students
+    -create button for form-select
+    -user hits "go" app shows add comment section and hides dropdown
+      -event listener for button
+      -function to hide/show appropriate page content
+    -page script needs to fetch the comments for that student and populate the UI with them (id=commentHistory)
+    -add event listeners to edit and delete buttons on comment history
+    -->
 
 <!--
     When the route for this page is hit, we can send along the list of students. that will be used to populate the drop down. to view all existing students.
