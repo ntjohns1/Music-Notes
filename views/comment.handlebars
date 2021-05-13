@@ -49,6 +49,7 @@
         </div>
         {{!-- use #each helper to populate lines with comment history --}}
         <div id="manageComments" class="input-group">
+           {{!-- this part won't work but I'm keeping it as a placeholder --}}
             {{#each comments as |comment|}}
             <textarea class="form-control">
                 {{comment.date}}
