@@ -30,9 +30,13 @@
                             <label for="studentName-scheduleLesson" class="form-label">Student Name: </label>
                             <select class="form-select p-2 m-3" aria-label="studentName-scheduleLesson" id="studentName-scheduleLesson">
                                 <option selected>Select a Student</option>
-                                {{#each user as |user|}} <!--review gallery activity-->
+                                {{!-- {{#each user as |user|}} <!--review gallery activity-->
                                     <option value="{{user.id}}">{{user.first_name}} {{user.last_name}}</option> <!--Grab the student id from the value-->
-=                               {{/each}}
+                               {{/each}} --}}
+                                    <option value="Bob">Bob</option> <!--Grab the student id from the value-->
+                                    <option value="Joe">Joe</option> <!--Grab the student id from the value-->
+                                    <option value="Steve">Steve</option> <!--Grab the student id from the value-->
+
                             </select>
                             <script>
                                 const test = document.querySelector('#studentName-scheduleLesson')
