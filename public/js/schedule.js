@@ -9,18 +9,27 @@ const grabEventData = async (event) => {
     const description = `${studentName}'s Lesson with Mr. Music Teacher`
     const summary = `${studentName}'s Lesson with Mr. Music Teacher`
     
-    console.log(pickedDate);
+    const month = parseInt(pickedDate.split("/")[0]);
+    const day = parseInt(pickedDate.split("/")[1]);
+    const year = parseInt(pickedDate.split("/")[2]);
+    const hour = parseInt(userStartTime)
 
-    const month = pickedDate.split("/")[0];
-    const day = pickedDate.split("/")[1];
-    const year = pickedDate.split("/")[2];
-    const hour = userStartTime
-
-    console.log (`Lesson date: Month ${month}, Day ${day}, Year ${year}`)
-    console.log (`Lesson time: ${userStartTime}`)
-    console.log (summary)
     
     //fectch request through api route!
+    if(pickedDate && hour && summary) {
+        console.log(`month ${month} day ${day} year ${year} hour ${hour} summary ${summary}`)
+        const response = await fetch('/api/events/', {
+            method: 'POST',
+            body: JSON.stringify({ year, month, day, hour, summary, description }),
+            headers: { 'Content-Type': 'application/json' },
+        })
+        if(response.ok) {
+             document.location.replace('/schedule');
+         } else {
+             alert('Failed to schedule event')// change to a modal
+        }
+
+    }
    
 }
 

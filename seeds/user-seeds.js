@@ -4,20 +4,20 @@ const userData = [
     {
         first_name: 'nelson',
         last_name: 'johns',
-        password: '2342342adsada',
+        password: 'password1234',
         email: 'nelson@gmail.com',
         is_teacher: true,
     },
     {
         first_name: 'ashe',
         last_name: 'smith',
-        password: '1234asdf',
+        password: 'password1234',
         email: 'ashe@gmail.com',
     },
     {
         first_name: 'lily',
         last_name: 'peterson',
-        password: 'asdasda123123',
+        password: 'password1234',
         email: 'lily@gmail.com',
     }
 ];
