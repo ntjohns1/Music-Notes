@@ -3,7 +3,6 @@ const viewComments = async (event) => {
     //select a student or findbyPK() and grab all the comments for that student along with the associated data
 }
 
-
 const addComment = async (event) => {
     event.preventDefault();
 
