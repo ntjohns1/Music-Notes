@@ -27,33 +27,13 @@ Event.init(
             type: DataTypes.INTEGER,
             allowNull: false, 
         },
-        minute: {
-            type: DataTypes.INTEGER,
-            allowNull: false, 
-        },
         summary: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        decription: {
+        description: {
             type: DataTypes.STRING,
             allowNull: false,
-        },
-        student_id: {
-            type: DataTypes.INTEGER,
-            allwNull: false,
-            references: {
-                model: 'user',
-                key: 'id',
-            },
-        },
-        teacher_id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: 'user',
-                key: 'id',
-            },
         },
         calendar_id: {
             type: DataTypes.STRING,
