@@ -24,16 +24,33 @@
     <div class="my-4">
         <h3>Welcome to Schedule Management!</h3>
             <!--Get Students target select with id and append sibling to the first option??--> 
-                    <h4>Schedule a Lesson:</h4>
+            <div class="card p-4 m-4">
+                <div class="card-header">
+                    <h3>Schedule a Lesson</h3>
+                </div>
+                <div class="card-body"></div>
                     <form class="form scheduleLessonForm">
                         <div class="form-group">
-                      <label for="studentName-scheduleLesson" class="form-label">Student Name: </label>
-                      <select class="form-select p-2 m-3" aria-label="studentName-scheduleLesson" id="studentName-scheduleLesson">
-                        <option selected>Select a Student</option>
-                            <option value="1">Student Name</option> <!--Grab the student id from the value-->
-                            <option value="2">Student Name 2</option>
-                            <option value="3">Student Name 3</option>
-                    </select>
+                            <label for="studentName-scheduleLesson" class="form-label">Student Name: </label>
+                            <select class="form-select" aria-label="studentName-scheduleLesson" id="studentName-scheduleLesson">
+                                <option selected>Select a Student</option>
+                                {{!-- {{#each user as |user|}} <!--review gallery activity-->
+                                    <option value="{{user.id}}">{{user.first_name}} {{user.last_name}}</option> <!--Grab the student id from the value-->
+                                {{/each}} --}}
+                                    <option value="Bob">Bob</option> <!--Grab the student id from the value-->
+                                    <option value="Joe">Joe</option> <!--Grab the student id from the value-->
+                                    <option value="Steve">Steve</option> <!--Grab the student id from the value-->
+
+                            </select>
+                            <script>
+                                const test = document.querySelector('#studentName-scheduleLesson')
+                                test.addEventListener('change', e => {
+                                    console.log('e.target.value==>>', e.target.value)
+                                    const selectedStudent = e.target.value
+                                    console.log('selectedStudent', selectedStudent)
+                                    return selectedStudent
+                                })
+                            </script>
                         </div>
 
                     <div class="form-group">
@@ -47,24 +64,28 @@
                     </div>    
                     
                     <div class="form-group">
-                        <label for="exampleFormControlTextarea1" class="form-label">Select Time: </label>
-                        <select class="form-select p-2 m-3" aria-label="Default select example" id="startTime-scheduleLesson">
-                          <option selected>Select Time</option>
-                              <option value="1">10:00am</option> <!--Grab the student id from the value-->
-                              <option value="2">11:00am</option>
-                              <option value="3">2:00pm</option>
+                        <label for="startTime-scheduleLesson" class="form-label">Select Time: </label>
+                        <select class="form-select p-2 m-3" aria-label="startTime-scheduleLesson" id="startTime-scheduleLesson">
+                            <option selected>Select Time</option>
+                                <option value="10">10:00am</option> <!--Grab the student id from the value-->
+                                <option value="11">11:00am</option>
+                                <option value="14">2:00pm</option>
                         </select>
-                          </div>
-  
+                            </div>
+
+                    {{!-- <div class="mb-3">
+                        <label for="description-scheduleLesson" class="form-label">Description</label>
+                        <input type="text" class="form-control" id="description-scheduleLesson" placeholder="(student name) lesson with (teacher name).">
+                    </div> --}}
 
 
                     <div class="form-group">
-                      <button class="btn btn-secondary" type="submit">Schedule Lesson</button>
+                        <button class="btn btn-secondary" type="submit">Schedule Lesson</button>
                     </div>
                     <!--Event model: id, year, month, day, hour, minute, summary, description, student id, teacher id, calender id-->
 
                     </form>
-            
+            </div>
             <!-- We need a form or series of forms that can do the following things:
             Drop down list of existing students:  STUDENT NAMES (get req)
             View existing lessons: get req

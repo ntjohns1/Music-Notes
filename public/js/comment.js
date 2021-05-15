@@ -9,6 +9,12 @@ const selectStudent = async (event) => {
     const student = document.querySelector('#userSelect').value.trim();
     console.log(student);
 
+    // take the student's id
+    // put it into the query
+    // the /api/comment route must be setup to handle this
+    // it will return the data
+    // then the front end js needs to build out the rest of the view
+
 
     // figure out how to grab the id for the selected user
     // document.querySelector('#userSelect').setAttribute('hidden', true);

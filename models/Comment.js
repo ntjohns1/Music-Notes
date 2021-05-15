@@ -19,22 +19,6 @@ Comment.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        student_id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: 'user',
-                key: 'id',
-            },
-        },
-        teacher_id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: 'user',
-                key: 'id',
-            },
-        },
     },
     {
         sequelize,
