@@ -50,11 +50,17 @@ router.get('/signup', async (req, res) => {
 
 router.get('/students', async (req, res) => {
     if (req.session.logged_in) {
-        res.render('students')
+      const userData = await User.findAll().catch((err) => {
+        res.json(err);
+      });
+      const users = userData.map((user) => user.get({ plain: true }));
+      const students = users.filter(teacher => teacher.is_teacher == 0);
+      res.render('students', { students });
+  
         return;
+    } else {
+      res.render('login');
     }
-    
-    res.render('login');
 });
 
 router.get('/schedule', async (req, res) => {
