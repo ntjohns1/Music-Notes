@@ -1,5 +1,6 @@
+
 <div class="bg-light p-3">
-<!--Portal Nav-->
+    <!--Portal Nav-->
     <ul class="nav nav-tabs">
     <li class="nav-item">
         <a class="nav-link text-black-50" href="/portal">Portal Home</a>
@@ -18,17 +19,57 @@
     </li>
     </ul>
 
-<!--Portal Content-->
+    <!--Portal Content-->
     <div class="my-4">
         <h3>Welcome to Student Management!</h3>
-            <!-- We need a form or series of forms that can do the following things:
+        <!-- We need a form or series of forms that can do the following things:
                 Drop down list of existing students:  STUDENT NAMES (get req)
                 Add a comment for selected student: post req
+
                 View History of comments: get req
                 Edit an existing comment: put req
                 Delete a comment: delete req
             -->
+        {{!-- helper to populates a list of users (need to figure out how to limit to isTeacher: false) --}}
+        <select id="userSelect" class="form-select" aria-label="Select a Student">
+            {{#each users as |user|}}
+            <option>
+                {{user.id}}
+                {{user.first_name}}
+                {{user.last_name}}
+            </option>
+            {{/each}}
+            <!--Grab the student id from the value-->
+        </select>
+        <button id="userSelectBtn" type="submit" class="btn btn-info">GO</button>
+        {{!-- to do: change alert in public comment.js to modal --}}
+        <div id="addComment" class="form-group">
+            <label for="commentTextarea">Add a Comment</label>
+            <textarea class="form-control" id="commentTextarea" rows="3"></textarea>
+            <button id="addCommentBtn" type="submit" class="btn btn-info">SEND</button>
+        </div>
+        {{!-- use #each helper to populate lines with comment history --}}
+        <div id="manageComments" class="input-group">
+           {{!-- this part won't work but I'm keeping it as a placeholder --}}
+            {{#each comments as |comment|}}
+            <textarea class="form-control">
+                {{comment.date}}
+                {{comment.content}}
+                </textarea>
+            <div class="input-group-append">
+                <button id="editBtn" class="badge badge-pill badge-info p-4" type="button">EDIT</button>
+                <button id="deleteBtn" class="badge badge-pill badge-danger p-4" type="button">DELETE</button>
+            </div>
+             {{/each}}
+        </div>
 
     </div>
 
 </div>
+<script src="./js/comment.js"></script>
+<!--
+    When the route for this page is hit, we can send along the list of students. that will be used to populate the drop down. to view all existing students.
+    User can then select a student…the page script will then fetch the comments for that student. and populate the UI
+    The UI will allow the user to edit a comment..on edit of that comment a put request will be sent to update that comment.
+    the UI will have a delete button on a comment that will send a delete request
+    -->
