@@ -1,5 +1,19 @@
 const { google } = require('googleapis');
 require('dotenv').config();
+const { QueryTypes } = require('sequelize');
+const Sequelize = require('sequelize');
+const fetch = require("node-fetch");
+
+var sequelize= new Sequelize(
+    process.env.DB_NAME,
+    process.env.DB_USER,
+    process.env.DB_PASSWORD,
+    {
+      host: 'localhost',
+      dialect: 'mysql',
+      port: 3306
+    }
+  );
 
 const CREDENTIALS = JSON.parse(process.env.CREDENTIALS);
 const calendarId = process.env.CALENDAR_ID;
@@ -40,10 +54,8 @@ function insertNewEvent(newYear, newMonth, newDay, newHour, summary, description
         }
 
         let newDateTime = `${year}-${month}-${day}T${hour}:${minute}:00.000`;
-        console.log(newDateTime);
 
         let event = new Date(Date.parse(newDateTime));
-        console.log(event);
 
         let startDate = event;
         let endDate = new Date(new Date(startDate).setHours(startDate.getHours() + 1));
@@ -55,7 +67,6 @@ function insertNewEvent(newYear, newMonth, newDay, newHour, summary, description
     };
 
     const insertEvent = async (event) => {
-
         try {
             let response = await calendar.events.insert({
                 auth: auth,
@@ -91,11 +102,64 @@ function insertNewEvent(newYear, newMonth, newDay, newHour, summary, description
 
     insertEvent(event)
         .then((res) => {
+            getNewCalendarId(event);
             console.log(res);
         })
         .catch((err) => {
             console.log(err);
         });
+};
+
+function getNewCalendarId(newEvent) {
+    const getEvents = async (dateTimeStart, dateTimeEnd) => {
+
+        try {
+            let response = await calendar.events.list({
+                auth: auth,
+                calendarId: calendarId,
+                timeMin: dateTimeStart,
+                timeMax: dateTimeEnd,
+                timeZone: 'America/Chicago'
+            });
+        
+            let items = response['data']['items'];
+            return items;
+        } catch (error) {
+            console.log(`Error at getEvents --> ${error}`);
+            return 0;
+        }
+    };
+    
+    let start = newEvent;
+    let end = newEvent;
+    
+    getEvents(start, end)
+        .then((res) => {
+            let calendar_Id = res[0].id;
+            saveCalendarId(calendar_Id);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    
+};
+
+function saveCalendarId(calendar_id) {
+    const getUsers =  async () => {
+        const event = await sequelize.query("SELECT * FROM event", { type: QueryTypes.SELECT });
+        let last_element = event[event.length - 1];
+        inputId(last_element.id);
+    };
+
+    const inputId = async (id) => {
+        const response = await fetch(`http://localhost:3001/api/events/${id}`, {
+            method: 'PUT',
+            body: JSON.stringify({ calendar_id: calendar_id }),
+            headers: {'Content-Type': 'application/json'},
+        })
+    };
+    
+    getUsers();
 };
 
 function deleteEvent(calendar_id) {
