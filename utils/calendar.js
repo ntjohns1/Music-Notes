@@ -55,7 +55,9 @@ function insertNewEvent(newYear, newMonth, newDay, newHour, summary, description
 
         let newDateTime = `${year}-${month}-${day}T${hour}:${minute}:00.000`;
 
-        let event = new Date(Date.parse(newDateTime));
+        let event;
+
+        event = new Date(Date.parse(newDateTime));
 
         let startDate = event;
         let endDate = new Date(new Date(startDate).setHours(startDate.getHours() + 1));
@@ -130,12 +132,15 @@ function getNewCalendarId(newEvent) {
         }
     };
 
+    console.log(newEvent);
+
     let start = newEvent;
     let end = newEvent;
 
     getEvents(start, end)
         .then((res) => {
-            let calendar_Id = res[0].id;
+            let newId = res[res.length - 1];
+            let calendar_Id = newId.id;
             saveCalendarId(calendar_Id);
         })
         .catch((err) => {
@@ -190,5 +195,19 @@ function deleteEvent(eventId) {
             console.log(err);
         });
 };
+
+function testFunction () {
+    const getUsers = async () => {
+        const results = await sequelize.query('SELECT user.id, user.is_teacher, CONCAT (user.first_name, " ", user.last_name) AS name FROM user', { type: QueryTypes.SELECT });
+        const student = results.filter(teacher => teacher.is_teacher == 0);
+
+        student.forEach(({ name }) => {
+            console.log(name );
+        });
+      };
+      getUsers(); 
+};
+
+// testFunction();
 
 module.exports = { insertNewEvent, deleteEvent };
