@@ -21,13 +21,13 @@ const addStudentHandler = async (event) => {
 
     if (first_name && last_name && email) {
         console.log(first_name , last_name , username , email , password , is_Teacher )
-        const response = await fetch('/api/students', {
+        const response = await fetch('/api/student', {
             method: 'POST',
             body: JSON.stringify({ first_name, last_name, username, email, password, is_Teacher}),
             headers: { 'Content-Type': 'application/json' },
         })
         if(response.ok) {
-            document.location.replace('/');
+            document.location.replace('/students');
             alert('Student successfully added!')
         } else {
             alert('Failed to add student')// change to a modal
@@ -38,18 +38,21 @@ const addStudentHandler = async (event) => {
 //this function does not work yet
 const deleteStudent = async (event) => {
     event.preventDefault();
+const studentId = document.querySelector('#delete-student-btn').value
+    console.log(studentId);
 
-    if (event.target.hasAttribute('data-id')) {
-        const id = event.target.getAttribute('data-id');
+    if (studentId) {
+        const id = studentId;
     
-        const response = await fetch(`/api/students/${id}`, {
+        const response = await fetch(`/api/student/${id}`, {
           method: 'DELETE',
         });
     
         if (response.ok) {
-          document.location.replace('/profile');
+          console.log("student deleted");
+          document.location.replace('/students');
         } else {
-          alert('Failed to delete project');
+          alert('Failed');
         }
       }
     
@@ -81,6 +84,10 @@ const viewStudents = async (event) => {
 document
   .querySelector('.add-student-form')
   .addEventListener('submit', addStudentHandler);
+
+  document
+  .querySelector('#delete-student-btn')
+  .addEventListener('click', deleteStudent);
 
 
 // document
