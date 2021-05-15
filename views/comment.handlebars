@@ -33,8 +33,7 @@
         {{!-- helper to populates a list of users (need to figure out how to limit to isTeacher: false) --}}
         <select id="userSelect" class="form-select" aria-label="Select a Student">
             {{#each users as |user|}}
-            <option>
-                {{user.id}}
+            <option {{user.id}}>
                 {{user.first_name}}
                 {{user.last_name}}
             </option>
