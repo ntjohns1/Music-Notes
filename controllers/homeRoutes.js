@@ -48,6 +48,15 @@ router.get('/signup', async (req, res) => {
     }
 })
 
+router.get('/calendar', async (req, res) => {
+  if(req.session.logged_in) {
+      res.render('calendar')
+  } else{
+      res.render('login')
+
+  }
+})
+
 router.get('/students', async (req, res) => {
     if (req.session.logged_in) {
       const userData = await User.findAll().catch((err) => {
