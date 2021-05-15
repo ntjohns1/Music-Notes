@@ -157,7 +157,7 @@ function saveCalendarId(calendar_id) {
     };
 
     const inputId = async (id) => {
-        const response = await fetch(`http://localhost:3001/api/events/${id}`, {
+        const response = await fetch(`http://uncbootcampmusicnotes.herokuapp.com/api/events/${id}`, {
             method: 'PUT',
             body: JSON.stringify({ calendar_id: calendar_id }),
             headers: { 'Content-Type': 'application/json' },
