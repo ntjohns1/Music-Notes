@@ -1,0 +1,31 @@
+  
+  /* CARDS */
+.calendar-card {
+    margin: 20px;
+    flex: 0 1 300px;
+  }
+
+.calendar-card-header {
+    font-size: 1.5rem;
+    color: var(--tertiary);
+    margin: 3;
+    padding: 0.625rem;
+    border-bottom-style: solid;
+    text-align: center;
+  }
+
+.responsiveCal {
+    position: relative; padding-bottom: 75%; height: 0; overflow: hidden;
+    }
+
+.responsiveCal iframe {
+     position: absolute; top:0; left: 0; width: 100%; height: 100%;     
+    }
+  
+   /* LAYOUT */
+   .container {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    width: 100%;
+  }
