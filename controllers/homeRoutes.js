@@ -95,12 +95,17 @@ router.get('/logout', async (req, res) => {
   res.render('homepage');
 });
 
-router.get('/comment', async (req, res) => {
+router.get('/comments', async (req, res) => {
   const userData = await User.findAll().catch((err) => {
     res.json(err);
   });
   const users = userData.map((user) => user.get({ plain: true }));
   res.render('comment', { users });
+  const commentData = await Comment.findAll().catch((err) => {
+    res.json(err);
+  });
+  const comments = commentData.map((comment) => comment.get({ plain: true }));
+  res.render('comment', { comments });
 });
 
 module.exports = router;
