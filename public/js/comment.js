@@ -1,29 +1,39 @@
 // **user hits "go" app shows add comment section and hides dropdown
 // add submit button under text area that calls addComment, format inputs to match 
-// **function to hide/show appropriate page content
+// **set attribute hidden back to false for text area and comment history
 // page script needs to fetch the comments for that student and populate the UI with them (id=commentHistory)
 // add event listeners to edit and delete buttons on comment history
-const { User, Comment } = require('../../models');
-const { findAll } = require('../../models/User');
-
 const selectStudent = async (event) => {
+    console.log('it works');
     event.preventDefault();
     const student = document.querySelector('#userSelect').value.trim();
+    console.log(student);
+
 
     // figure out how to grab the id for the selected user
     // document.querySelector('#userSelect').setAttribute('hidden', true);
     // document.querySelector('#manageComments').removeAttribute('hidden');
-    const commentData = await Comment.findAll().catch((err) => {
-        res.json(err);
-    });
+    // query to get user id
+    const response = await fetch('/api/comment', {
+        method: 'GET',
+        body: JSON.stringify({ id, first_name, last_name }),
+        headers: { 'Content-Type': 'application/json' },
+      });
+      if (response.ok) {
+        console.log(response.body);
+      } else {
+        alert(response.statusText);
+      }
+    // then fetch to get comments
     // filter the comments where user id we grabbed === Comment.student_id
     // create the elements using the bootstrap components on lines 53 through 61 of the comment.handlebars file
+    // populate text areas with comment history
 }
 
-const viewComments = async (event) => {
-    event.preventDefault();
-    //select a student or findbyPK() and grab all the comments for that student along with the associated data
-}
+// const viewComments = async (event) => {
+//     event.preventDefault();
+//     //select a student or findbyPK() and grab all the comments for that student along with the associated data
+// }
 
 
 const addComment = async (event) => {
@@ -50,9 +60,9 @@ const addComment = async (event) => {
     }
 }
 
-document
-    .querySelector('.comment-form')
-    .addEventListener('submit', addComment);
+// document
+//     .querySelector('.comment-form')
+//     .addEventListener('submit', addComment);
 document
     .querySelector('#userSelectBtn')
-    .addEventListener('submit', selectStudent);
+    .addEventListener('click', selectStudent);

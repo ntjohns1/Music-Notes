@@ -1,3 +1,4 @@
+
 <div class="bg-light p-3">
     <!--Portal Nav-->
     <ul class="nav nav-tabs">
@@ -56,8 +57,8 @@
                 {{comment.content}}
                 </textarea>
             <div class="input-group-append">
-                <button class="badge badge-pill badge-info p-4" type="button">EDIT</button>
-                <button class="badge badge-pill badge-danger p-4" type="button">DELETE</button>
+                <button id="editBtn" class="badge badge-pill badge-info p-4" type="button">EDIT</button>
+                <button id="deleteBtn" class="badge badge-pill badge-danger p-4" type="button">DELETE</button>
             </div>
              {{/each}}
         </div>
@@ -65,7 +66,7 @@
     </div>
 
 </div>
-
+<script src="./js/comment.js"></script>
 <!--
     When the route for this page is hit, we can send along the list of students. that will be used to populate the drop down. to view all existing students.
     User can then select a student…the page script will then fetch the comments for that student. and populate the UI
