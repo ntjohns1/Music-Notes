@@ -4,16 +4,16 @@ const { QueryTypes } = require('sequelize');
 const Sequelize = require('sequelize');
 const fetch = require("node-fetch");
 
-var sequelize= new Sequelize(
+var sequelize = new Sequelize(
     process.env.DB_NAME,
     process.env.DB_USER,
     process.env.DB_PASSWORD,
     {
-      host: 'localhost',
-      dialect: 'mysql',
-      port: 3306
+        host: 'localhost',
+        dialect: 'mysql',
+        port: 3306
     }
-  );
+);
 
 const CREDENTIALS = JSON.parse(process.env.CREDENTIALS);
 const calendarId = process.env.CALENDAR_ID;
@@ -121,7 +121,7 @@ function getNewCalendarId(newEvent) {
                 timeMax: dateTimeEnd,
                 timeZone: 'America/Chicago'
             });
-        
+
             let items = response['data']['items'];
             return items;
         } catch (error) {
@@ -129,10 +129,10 @@ function getNewCalendarId(newEvent) {
             return 0;
         }
     };
-    
+
     let start = newEvent;
     let end = newEvent;
-    
+
     getEvents(start, end)
         .then((res) => {
             let calendar_Id = res[0].id;
@@ -141,11 +141,11 @@ function getNewCalendarId(newEvent) {
         .catch((err) => {
             console.log(err);
         });
-    
+
 };
 
 function saveCalendarId(calendar_id) {
-    const getUsers =  async () => {
+    const getUsers = async () => {
         const event = await sequelize.query("SELECT * FROM event", { type: QueryTypes.SELECT });
         let last_element = event[event.length - 1];
         inputId(last_element.id);
@@ -155,16 +155,15 @@ function saveCalendarId(calendar_id) {
         const response = await fetch(`http://localhost:3001/api/events/${id}`, {
             method: 'PUT',
             body: JSON.stringify({ calendar_id: calendar_id }),
-            headers: {'Content-Type': 'application/json'},
+            headers: { 'Content-Type': 'application/json' },
         })
     };
-    
+
     getUsers();
 };
 
-function deleteEvent(calendar_id) {
+function deleteEvent(eventId) {
     const deleteEvent = async (eventId) => {
-
         try {
             let response = await calendar.events.delete({
                 auth: auth,
@@ -182,8 +181,6 @@ function deleteEvent(calendar_id) {
             return 0;
         }
     };
-
-    let eventId = calendar_id;
 
     deleteEvent(eventId)
         .then((res) => {
