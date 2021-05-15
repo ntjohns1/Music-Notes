@@ -161,7 +161,8 @@ function saveCalendarId(calendar_id) {
             method: 'PUT',
             body: JSON.stringify({ calendar_id: calendar_id }),
             headers: { 'Content-Type': 'application/json' },
-        })
+        });
+        console.log(response);
     };
 
     getUsers();
