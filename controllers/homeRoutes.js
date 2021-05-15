@@ -100,12 +100,11 @@ router.get('/comments', async (req, res) => {
     res.json(err);
   });
   const users = userData.map((user) => user.get({ plain: true }));
-  res.render('comment', { users });
   const commentData = await Comment.findAll().catch((err) => {
     res.json(err);
   });
   const comments = commentData.map((comment) => comment.get({ plain: true }));
-  res.render('comment', { comments });
+  res.render('comment', { users, comments });
 });
 
 module.exports = router;
