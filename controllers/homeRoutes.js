@@ -77,10 +77,6 @@ router.get('/schedule', async (req, res) => {
     res.render('login');
 });
 
-
-  res.render('signup');
-});
-
 router.get('/logout', async (req, res) => {
   if (req.session.logged_in) {
     res.render('portal')
