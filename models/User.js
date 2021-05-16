@@ -47,8 +47,8 @@ User.init(
             },
         },
         is_teacher: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: false,
+            type: DataTypes.TINYINT,
+            //defaultValue: false,
         },
     },
     {
