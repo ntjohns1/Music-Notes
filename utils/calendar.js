@@ -2,7 +2,8 @@ const { google } = require('googleapis');
 require('dotenv').config();
 const { QueryTypes } = require('sequelize');
 const Sequelize = require('sequelize');
-const fetch = require("node-fetch");
+const axios = require('axios').default;
+const fetch = require('node-fetch');
 
 var sequelize = new Sequelize(
     process.env.DB_NAME,
@@ -105,7 +106,6 @@ function insertNewEvent(newYear, newMonth, newDay, newHour, summary, description
     insertEvent(event)
         .then((res) => {
             getNewCalendarId(event);
-            console.log(res);
         })
         .catch((err) => {
             console.log(err);
@@ -132,8 +132,6 @@ function getNewCalendarId(newEvent) {
         }
     };
 
-    console.log(newEvent);
-
     let start = newEvent;
     let end = newEvent;
 
@@ -150,19 +148,30 @@ function getNewCalendarId(newEvent) {
 };
 
 function saveCalendarId(calendar_id) {
-    const getUsers = async () => {
-        const event = await sequelize.query("SELECT * FROM event", { type: QueryTypes.SELECT });
-        let last_element = event[event.length - 1];
-        inputId(last_element.id);
-    };
-
     const inputId = async (id) => {
-        const response = await fetch(`https://uncbootcampmusicnotes.herokuapp.com/api/events/${id}`, {
+        const response = await fetch(`http://localhost:3001/api/events/${id}`, {
             method: 'PUT',
             body: JSON.stringify({ calendar_id: calendar_id }),
             headers: { 'Content-Type': 'application/json' },
         });
-        console.log(response);
+
+        // axios({
+        //     method: 'put',
+        //     url:`/api/events/${id}`,
+        //     data: {
+        //         calendar_id: calendar_id
+        //     }
+        // })
+        // .then(function (response) {
+        //     // console.log(response)
+        // })
+
+    };
+
+    const getUsers = async () => {
+        const event = await sequelize.query("SELECT * FROM event", { type: QueryTypes.SELECT });
+        let last_element = event[event.length - 1];
+        inputId(last_element.id);
     };
 
     getUsers();
