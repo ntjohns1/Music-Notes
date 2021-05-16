@@ -26,7 +26,7 @@ const addStudentHandler = async (event) => {
             headers: { 'Content-Type': 'application/json' },
         })
         if(response.ok) {
-            alert('Student successfully added!')
+            alert(`${first_name} ${last_name} successfully added as student!\nPlease write down student's password: ${password}`)
             document.location.replace('/students');
         } else {
             alert('Failed to add student')// change to a modal
@@ -34,10 +34,11 @@ const addStudentHandler = async (event) => {
     }
 }
 
-//this function does not work yet
+//works sometimes
 const deleteStudent = async (event) => {
     event.preventDefault();
-const studentId = document.querySelector('#delete-student-btn').value
+    console.log('button clicked')
+    const studentId = document.querySelector('#delete-student-btn').value
     console.log(studentId);
 
     if (studentId) {
@@ -56,6 +57,7 @@ const studentId = document.querySelector('#delete-student-btn').value
       }
     
 }
+
 const viewStudents = async (event) => {
     
     const getUsers = async () => {
@@ -80,14 +82,50 @@ const viewStudents = async (event) => {
 
 }
 
+const updateStudent = async (event) => {
+    event.preventDefault();
+    console.log('button clicked')
+    const studentId = document.querySelector('#delete-student-btn').value
+    console.log(studentId);
+
+    const first_name = document.querySelector('#update-firstname').value.trim();
+    const last_name = document.querySelector('#update-lastname').value.trim();
+    const email = document.querySelector('#update-email').value.trim();
+
+    if (studentId) {
+        const id = studentId;
+    
+        const response = await fetch(`/api/student/${id}`, {
+          method: 'PUT',
+          body: JSON.stringify({
+           first_name,
+           last_name,
+           email
+        }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+    
+        if (response.ok) {
+          alert(`${first_name} ${last_name} successfully updated.`);
+          document.location.replace('/students');
+        } else {
+          alert('Failed');
+        }
+      }
+}
 document
   .querySelector('.add-student-form')
   .addEventListener('submit', addStudentHandler);
 
-  document
+document
   .querySelector('#delete-student-btn')
   .addEventListener('click', deleteStudent);
 
+document
+  .querySelector('#update-student-btn')
+  .addEventListener('click', updateStudent);
 
 // document
 //   .querySelector('.view-student-form')

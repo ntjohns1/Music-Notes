@@ -53,11 +53,18 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
     try {
-        const userData = await User.update(req.body, {
-            where: {
-                id: req.params.id,
+        const userData = await User.update(
+            {
+                first_name: req.body.first_name,
+                last_name: req.body.last_name,
+                email: req.body.email,
             },
-        });
+            {
+                where: {
+                    id: req.params.id,
+                },
+            }
+        );
 
         if (!userData) {
             res.status(404).json({ message: 'No student found with that id!' });
