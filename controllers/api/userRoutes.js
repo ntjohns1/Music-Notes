@@ -9,7 +9,7 @@ router.post('/signup', async (req, res) => {
       last_name: req.body.last_name,
       email: req.body.email,
       password: req.body.password,
-      is_Teacher: req.body.is_Teacher,
+      is_teacher: req.body.is_teacher,
     });
     console.log(userData)
 

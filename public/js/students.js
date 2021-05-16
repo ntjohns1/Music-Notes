@@ -16,13 +16,13 @@ const addStudentHandler = async (event) => {
      } 
     
     const password = makePassword(10)//generate random password
-    const is_Teacher = false
+    const is_teacher = false
 
     if (first_name && last_name && email) {
-        console.log(first_name , last_name , email , password , is_Teacher )
+        console.log(first_name , last_name , email , password , is_teacher )
         const response = await fetch('/api/student', {
             method: 'POST',
-            body: JSON.stringify({ first_name, last_name, email, password, is_Teacher}),
+            body: JSON.stringify({ first_name, last_name, email, password, is_teacher}),
             headers: { 'Content-Type': 'application/json' },
         })
         if(response.ok) {

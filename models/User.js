@@ -46,7 +46,7 @@ User.init(
                 isEmail: true,
             },
         },
-        is_Teacher: {
+        is_teacher: {
             type: DataTypes.TINYINT,
             //defaultValue: false,
         },
