@@ -3,7 +3,7 @@ require('dotenv').config();
 const { QueryTypes } = require('sequelize');
 const Sequelize = require('sequelize');
 const axios = require('axios').default;
-const fetch = require('node-fetch');
+// const fetch = require('node-fetch');
 
 var sequelize = new Sequelize(
     process.env.DB_NAME,
@@ -149,22 +149,22 @@ function getNewCalendarId(newEvent) {
 
 function saveCalendarId(calendar_id) {
     const inputId = async (id) => {
-        const response = await fetch(`http://localhost:3306/api/events/${id}`, {
-            method: 'PUT',
-            body: JSON.stringify({ calendar_id: calendar_id }),
-            headers: { 'Content-Type': 'application/json' },
-        });
+        // const response = await fetch(`http://localhost:3001/api/events/${id}`, {
+        //     method: 'PUT',
+        //     body: JSON.stringify({ calendar_id: calendar_id }),
+        //     headers: { 'Content-Type': 'application/json' },
+        // });
 
-        // axios({
-        //     method: 'put',
-        //     url:`/api/events/${id}`,
-        //     data: {
-        //         calendar_id: calendar_id
-        //     }
-        // })
-        // .then(function (response) {
-        //     // console.log(response)
-        // })
+        console.log("hitting save")
+
+        axios.put(
+            `http://localhost:3001/api/events/${id}`,
+            JSON.stringify({ calendar_id: calendar_id }),
+            { headers: {'Content-Type': 'application/json'} },
+        )
+        .then(function (response) {
+            console.log("Complete!")
+        })
 
     };
 

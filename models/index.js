@@ -7,10 +7,10 @@ Event.belongsTo(User, {
     onDelete: 'CASCADE'
 });
 
-Event.hasMany(Comment, {
-    foreignKey: 'eventId',
-    onDelete: 'CASCADE'
-});
+// Event.hasMany(Comment, {
+//     foreignKey: 'eventId',
+//     onDelete: 'CASCADE'
+// });
 
 Comment.belongsTo(User, {
     foreignKey: 'userId',

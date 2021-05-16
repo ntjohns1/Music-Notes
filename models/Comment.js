@@ -19,12 +19,13 @@ Comment.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        student_id: {
+        user_id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             references: {
                 model: 'user',
                 key: 'id',
+<<<<<<< HEAD
             },
         },
         // event_id: {
@@ -35,6 +36,10 @@ Comment.init(
         //         key: 'id',
         //     },
         // },
+=======
+            }
+        }
+>>>>>>> 2cd7cc7ff3b8713e31350ec5983c354937d35027
     },
     {
         sequelize,

@@ -22,7 +22,7 @@ const selectStudent = async (event) => {
     // document.querySelector('#userSelect').setAttribute('hidden', true);
     // document.querySelector('#manageComments').removeAttribute('hidden');
     // I just need to get an array of all the comments, then filter by student_id
-    const response = await fetch('/api/comment', {
+    const response = await fetch(`/api/comment/`, {
         method: 'GET',
     });
     if (response.ok) {
