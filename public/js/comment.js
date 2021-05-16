@@ -7,7 +7,6 @@ const selectStudent = async (event) => {
     console.log('it works');
     event.preventDefault();
     const student = document.querySelector('#userSelect').value.trim();
-    console.log(student);
 
     // take the student's id
     // put it into the query
@@ -22,7 +21,7 @@ const selectStudent = async (event) => {
     // query to get user id
     const response = await fetch('/api/comment', {
         method: 'GET',
-        body: JSON.stringify({ id, first_name, last_name }),
+        body: JSON.stringify({ first_name, last_name }),
         headers: { 'Content-Type': 'application/json' },
       });
       if (response.ok) {

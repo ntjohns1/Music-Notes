@@ -39,7 +39,7 @@ router.post('/', async (req, res) => {
         res.status(400).json(err);
     };
 
-    insertNewEvent(req.body.year, req.body.month, req.body.day, req.body.hour, req.body.summary, req.body.decription);
+    insertNewEvent(req.body.year, req.body.month, req.body.day, req.body.hour, req.body.summary, req.body.description);
 });
 
 router.put('/:id', async (req, res) => {
