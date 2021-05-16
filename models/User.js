@@ -46,9 +46,9 @@ User.init(
                 isEmail: true,
             },
         },
-        is_teacher: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: false,
+        is_Teacher: {
+            type: DataTypes.TINYINT,
+            //defaultValue: false,
         },
     },
     {
