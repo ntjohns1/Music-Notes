@@ -3,7 +3,6 @@ const addStudentHandler = async (event) => {
     console.log('button clicked')
     const first_name = document.querySelector('#firstName-createStudent').value.trim();
     const last_name = document.querySelector('#lastName-createStudent').value.trim();
-    const username = 'username'
     const email = document.querySelector('#email-createStudent').value.trim();
     
     function makePassword(maxLengthPass) {
@@ -20,15 +19,15 @@ const addStudentHandler = async (event) => {
     const is_Teacher = false
 
     if (first_name && last_name && email) {
-        console.log(first_name , last_name , username , email , password , is_Teacher )
+        console.log(first_name , last_name , email , password , is_Teacher )
         const response = await fetch('/api/student', {
             method: 'POST',
-            body: JSON.stringify({ first_name, last_name, username, email, password, is_Teacher}),
+            body: JSON.stringify({ first_name, last_name, email, password, is_Teacher}),
             headers: { 'Content-Type': 'application/json' },
         })
         if(response.ok) {
-            document.location.replace('/students');
             alert('Student successfully added!')
+            document.location.replace('/students');
         } else {
             alert('Failed to add student')// change to a modal
         }
