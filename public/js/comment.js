@@ -4,36 +4,39 @@
 // page script needs to fetch the comments for that student and populate the UI with them (id=commentHistory)
 // add event listeners to edit and delete buttons on comment history
 const selectStudent = async (event) => {
-    console.log('it works');
     event.preventDefault();
-    const student = document.querySelector('#userSelect').value.trim();
-
+    const student = document.querySelector('#userSelect').value;
     // take the student's id
     // put it into the query
     // the /api/comment route must be setup to handle this
     // it will return the data
     // then the front end js needs to build out the rest of the view
-
-
-    // figure out how to grab the id for the selected user
+    // const getUserComments = async () => {
+    //     const results = await sequelize.query('SELECT * FROM comment', { type: QueryTypes.SELECT });
+    //     const userComments = results.filter(student => comment.student_id === student)
+    //    console.log(userComments);
+    //     };
+    //     getUserComments(); 
+    //     return results
+    // };
     // document.querySelector('#userSelect').setAttribute('hidden', true);
     // document.querySelector('#manageComments').removeAttribute('hidden');
-    // query to get user id
+    // I just need to get an array of all the comments, then filter by student_id
     const response = await fetch('/api/comment', {
         method: 'GET',
-        body: JSON.stringify({ first_name, last_name }),
-        headers: { 'Content-Type': 'application/json' },
-      });
-      if (response.ok) {
-        console.log(response.body);
-      } else {
+    });
+    if (response.ok) {
+        // console.log(JSON.stringify(response.body));
+        console.log(JSON.stringify(response));
+        // document.location.replace('/comments')
+    } else {
         alert(response.statusText);
-      }
-    // then fetch to get comments
-    // filter the comments where user id we grabbed === Comment.student_id
-    // create the elements using the bootstrap components on lines 53 through 61 of the comment.handlebars file
-    // populate text areas with comment history
+    };
 }
+// filter the comments where user id we grabbed === Comment.student_id
+// create the elements using the bootstrap components on lines 53 through 61 of the comment.handlebars file
+// populate text areas with comment history
+
 
 // const viewComments = async (event) => {
 //     event.preventDefault();

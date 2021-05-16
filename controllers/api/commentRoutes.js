@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/comment', async (req, res) => {
+router.get('/comments', async (req, res) => {
     try {
         const userComment = await Comment.findAll({
             include: [{ model: User }],

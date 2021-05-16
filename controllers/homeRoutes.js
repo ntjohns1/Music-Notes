@@ -103,7 +103,7 @@ router.get('/comments', async (req, res) => {
   const commentData = await Comment.findAll().catch((err) => {
     res.json(err);
   });
-  const users = commentData.map((comment) => comment.get({ plain: true }));
+  const comments = commentData.map((comment) => comment.get({ plain: true }));
   const students = users.filter(teacher => teacher.is_teacher == 0);
   res.render('comment', { students, comments });
 });
