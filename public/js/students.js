@@ -37,24 +37,26 @@ const addStudentHandler = async (event) => {
 //works for first line only
 const deleteStudent = async (event) => {
     event.preventDefault();
-    console.log('button clicked')
-    const studentId = document.querySelector('#delete-student-btn').value
+    console.log('delete button clicked');
+
+    const studentId = $(this).parent
+    console.log(this)
     console.log(studentId);
 
-    if (studentId) {
-        const id = studentId;
+    // if (studentId) {
+    //     const id = studentId;
     
-        const response = await fetch(`/api/student/${id}`, {
-          method: 'DELETE',
-        });
+    //     const response = await fetch(`/api/student/${id}`, {
+    //       method: 'DELETE',
+    //     });
     
-        if (response.ok) {
-          console.log("student deleted");
-          document.location.replace('/students');
-        } else {
-          alert('Failed');
-        }
-      }
+    //     if (response.ok) {
+    //       console.log("student deleted");
+    //       document.location.replace('/students');
+    //     } else {
+    //       alert('Failed');
+    //     }
+    //   }
     
 }
 
@@ -86,7 +88,9 @@ const viewStudents = async (event) => {
 const updateStudent = async (event) => {
     event.preventDefault();
     console.log('button clicked')
+    
     const studentId = document.querySelector('#delete-student-btn').value
+    
     console.log(studentId);
 
     const first_name = document.querySelector('#update-firstname').value.trim();
@@ -116,18 +120,19 @@ const updateStudent = async (event) => {
         }
       }
 }
+
+// $('.add-student-form').submit(addStudentHandler)
+$(document).on('click', '.delete-student-btn', deleteStudent);
+// $(document).on('click', '.update-student-btn', updateStudent);
+
 document
   .querySelector('.add-student-form')
   .addEventListener('submit', addStudentHandler);
 
-document
-  .querySelector('#delete-student-btn')
-  .addEventListener('click', deleteStudent);
-
-document
-  .querySelector('#update-student-btn')
-  .addEventListener('click', updateStudent);
-
 // document
-//   .querySelector('.view-student-form')
-//   .addEventListener('submit', viewStudents);
+//   .querySelector('.delete-student-btn')
+//   .addEventListener('click', deleteStudent);
+
+document
+  .querySelector('.update-student-btn')
+  .addEventListener('click', updateStudent);

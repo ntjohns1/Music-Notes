@@ -21,12 +21,6 @@
 <!--Portal Content-->
     <div class="my-4">
         <h3>Welcome to Student Management!</h3>
-            <!-- We need a form or series of forms that can do the following things:
-                View existing students (Get req)
-                Create Students (Post req)
-                Update Students (Put req)
-                Remove (Delete)
-            -->
 
             <div class="card p-4 m-4">
                 <div class="card-header">
@@ -36,23 +30,23 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
+                                <th scope="col">ID</th>
                                 <th scope="col">First</th>
                                 <th scope="col">Last</th>
                                 <th scope="col">Email</th>
-                                <th scope="col">update</th>
-                                <th scope="col">delete</th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
                             {{#each students as |user|}}
                             <tr>
-                                <th scope="row">{{user.id}}</th>
-                                <td><textarea id="update-firstname">{{user.first_name}}</textarea></td>
-                                <td><textarea id="update-lastname">{{user.last_name}}</textarea></td>
-                                <td><textarea id="update-email">{{user.email}}</textarea></td>
-                                <td><button class="btn btn-info" value="{{user.id}}" type="submit" id="update-student-btn">Update</button></td>
-                                <td><button class="btn btn-danger" value="{{user.id}}" type="submit" id="delete-student-btn">Delete</button></td>
+                                <th scope="row" class="update-studentId" value="{{user.id}}">{{user.id}}</th>
+                                <td><textarea class="update-firstname">{{user.first_name}}</textarea></td>
+                                <td><textarea class="update-lastname">{{user.last_name}}</textarea></td>
+                                <td><textarea class="update-email">{{user.email}}</textarea></td>
+                                <td><button class="btn btn-info update-student-btn" value="{{user.id}}" type="button">Edit</button></td>
+                                <td><button class="btn btn-danger delete-student-btn" value="{{user.id}}" type="button">Delete</button></td>
                             </tr>
                             {{/each}}
 
@@ -67,6 +61,8 @@
                     <h4>Add New Student</h4>
                 </div>
                 <div class="card-body"></div>
+                    <p>Please note that when creating a student, their password is randomly generated. The password, which you will need to write down and share with your student, will appear in a pop up window.</p>
+                    <p>The student will need the email address and the generated password to log in.</p>
                     <form class="form add-student-form">
                         <div class="form-group">
                             <label for="firstName-createStudent">Student First Name:</label>
@@ -80,19 +76,8 @@
                             <label for="email-createStudent">Student Email:</label>
                             <input class="form-input" type="text" id="email-createStudent" />
                         </div>
-                        {{!-- <div class="form-group">
-                            <label for="password-signup">Password:</label>
-                            <input class="form-input" type="password" id="password-signup" />
-                        </div>
                         <div class="form-group">
-                            <label for="isTeacher-signup">Please select type of user:</label>
-                            <select class="form-control" id="isTeacher-signup">
-                                <option value="true">Teacher</option>
-                                <option value="false">Student</option>
-                            </select>
-                        </div> --}}
-                        <div class="form-group">
-                            <button class="btn btn-secondary" type="submit">Add Student</button>
+                            <button class="btn btn-success" type="submit">Add Student</button>
                         </div>
                     </form>
             </div>

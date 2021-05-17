@@ -2,7 +2,6 @@ const router = require('express').Router();
 const { User } = require('../../models');
 
 router.post('/signup', async (req, res) => {
-  //console.log('Signup Route is hit.')
   try {
     const userData = await User.create({
       first_name: req.body.first_name,
@@ -24,10 +23,8 @@ router.post('/signup', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-  //console.log('Login Route is hit.')
   try {
     const userData = await User.findOne({ where: { email: req.body.email } });
-    //console.log(userData)
     if (!userData) {
       res
         .status(400)
