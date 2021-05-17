@@ -71,7 +71,7 @@ Calendar data ia managed using the [Google Calendar API](https://developers.goog
 Deployed link: https://uncbootcampmusicnotes.herokuapp.com/ <br>
 Github Repo Link: https://github.com/ntjohns1/Project-2-Group-10
 
-<img src="./public/images/teacherportal.jpg" alt="Teacher Portal View" width="auto" height="200">
+<img src="./public/images/MusicNotesGif.gif" alt="Teacher Portal View" width="auto" height="200">
 
 ---
 
