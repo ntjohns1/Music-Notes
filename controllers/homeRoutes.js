@@ -95,7 +95,8 @@ router.get('/comments', async (req, res) => {
     res.json(err);
   });
   const comments = commentData.map((comment) => comment.get({ plain: true }));
-  res.render('comment', { users, comments });
+  const students = users.filter(teacher => teacher.is_teacher == 0);
+  res.render('comment', { students, comments });
 });
 
 module.exports = router;

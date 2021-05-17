@@ -14,6 +14,19 @@ router.get('/', async (req, res) => {
         res.status(500).json(err);
     }
 });
+router.get('/comments', async (req, res) => {
+    console.log('route hit')
+    try {
+        const user = await User.findAll({
+            //include: [{ model: Comment }],
+        });
+        //const users = userStudent.map((user) => user.get({plain: true}))
+        //res.render('students', {users}) 
+        res.status(200).json(user);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
 
 router.get('/:id', async (req, res) => {
     try {

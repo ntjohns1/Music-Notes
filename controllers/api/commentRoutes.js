@@ -13,6 +13,17 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.get('/comments', async (req, res) => {
+    try {
+        const userComment = await Comment.findAll({
+            include: [{ model: User }],
+        });
+        res.status(200).json(userComment);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
 router.get('/:id', async (req, res) => {
     try {
         const userComment = await Comment.findByPk(req.params.id, {
