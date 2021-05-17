@@ -21,15 +21,6 @@
     <!--Portal Content-->
     <div class="my-4">
         <h3>Welcome to Student Management!</h3>
-        <!-- We need a form or series of forms that can do the following things:
-                Drop down list of existing students:  STUDENT NAMES (get req)
-                Add a comment for selected student: post req
-
-                View History of comments: get req
-                Edit an existing comment: put req
-                Delete a comment: delete req
-            -->
-        {{!-- helper to populates a list of users --}}
         <select id="userSelect" class="form-select" aria-label="Select a Student">
             {{#each students as |user|}}
             <option value="{{user.id}}">
@@ -37,33 +28,38 @@
                 {{user.last_name}}
             </option>
             {{/each}}
-            <!--Grab the student id from the value-->
         </select>
         <button id="userSelectBtn" class="btn btn-secondary" value={{user.id}} type="submit">GO</button>
-        {{!-- to do: change alert in public comment.js to modal --}}
         <div id="addComment" class="form-group">
             <label for="commentTextarea">Add a Comment</label>
             <textarea class="form-control" id="commentTextarea" rows="3"></textarea>
             <button id="addCommentBtn" type="submit" class="btn btn-info">SEND</button>
         </div>
-        {{!-- use #each helper to populate lines with comment history --}}
-        <div id="manageComments" class="input-group">
-            {{!-- this part won't work but I'm keeping it as a placeholder --}}
-                <ul>
-                {{#each comments as |comment|}}
-                <li class="flex row">
-                    <textarea class="form-control">{{comment.date}}{{comment.content}}</textarea>
-                    <button id="editBtn" class="badge badge-pill badge-info p-4" type="button">EDIT</button>
-                    <button id="deleteBtn" class="badge badge-pill badge-danger p-4" type="button">DELETE</button>
-                </li>
-                {{/each}}
-                </ul>
-        </div>
-        </ul>
-
-    </div>
-
-</div>
+        <div id="manageComments" class="card-body">
+          <table>
+              <thead>
+                  <tr>
+                  <th scope="col"></th>
+                  <th scope="col">Comment</th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  </tr>
+              </thead>
+              <tbody>
+              {{#each comments as |comment|}}
+                  <tr>
+                      <th scope="row">{{comment.id}}</th>
+                      <td><textarea class="form-control">{{comment.date}}: {{comment.content}}</textarea>
+                      </td>
+                      <td><button id="editBtn" class="btn btn-info" value={{comment.id}} type="button">EDIT</button>
+                      </td>
+                      <td><button id="deleteBtn" class="btn btn-danger" value={{comment.id}} type="button">DELETE</button>
+                      </td>
+                  </tr>
+              {{/each}}
+              </tbody>
+           </table>
+      </div>
 <script src="./js/comment.js"></script>
 <!--
     When the route for this page is hit, we can send along the list of students. that will be used to populate the drop down. to view all existing students.

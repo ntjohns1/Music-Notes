@@ -25,21 +25,8 @@ Comment.init(
             references: {
                 model: 'user',
                 key: 'id',
-<<<<<<< HEAD
-            },
-        },
-        // event_id: {
-        //     type: DataTypes.INTEGER,
-        //     allowNull: true,
-        //     references: {
-        //         model: 'event',
-        //         key: 'id',
-        //     },
-        // },
-=======
             }
         }
->>>>>>> 2cd7cc7ff3b8713e31350ec5983c354937d35027
     },
     {
         sequelize,
