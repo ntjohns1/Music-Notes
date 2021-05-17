@@ -5,18 +5,17 @@ const signUpFormHandler = async (event) => {
     const last_name = document.querySelector('#lastName-signup').value.trim();
     const email = document.querySelector('#email-signup').value.trim();
     const password = document.querySelector('#password-signup').value.trim();
-    const is_teacher = document.querySelector('#isTeacher-signup').value; //userType needs to be a BOOLEAN
+    const is_teacher = true;
 
     if (first_name && last_name && email && password && is_teacher) {
-        //console.log(first_name , last_name , email , password , is_teacher )
         const response = await fetch('/api/user/signup', {
             method: 'POST',
             body: JSON.stringify({ first_name, last_name, email, password, is_teacher}),
             headers: { 'Content-Type': 'application/json' },
         })
         if(response.ok) {
-            alert('Thanks for signing up!')
-            document.location.replace('/');
+            alert('You have successfully signed up!\nPlease log in to begin using Music Notes')
+            document.location.replace('/login');
         } else {
             alert('Failed to sign up')// change to a modal?
         }

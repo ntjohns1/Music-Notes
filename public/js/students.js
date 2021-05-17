@@ -15,8 +15,8 @@ const addStudentHandler = async (event) => {
         return generatedPassword;
      } 
     
-    const password = makePassword(10)//generate random password
-    const is_teacher = false
+    const password = makePassword(8)//generate random password
+    const is_teacher = 0
 
     if (first_name && last_name && email) {
         console.log(first_name , last_name , email , password , is_teacher )
@@ -29,12 +29,12 @@ const addStudentHandler = async (event) => {
             alert(`${first_name} ${last_name} successfully added as student!\nPlease write down student's password: ${password}`)
             document.location.replace('/students');
         } else {
-            alert('Failed to add student')// change to a modal
+            alert('Failed to add student. Please check to make sure all fields have been filled out correctly.')// change to a modal
         }
     }
 }
 
-//works sometimes
+//works for first line only
 const deleteStudent = async (event) => {
     event.preventDefault();
     console.log('button clicked')
@@ -82,6 +82,7 @@ const viewStudents = async (event) => {
 
 }
 
+//works for first line only
 const updateStudent = async (event) => {
     event.preventDefault();
     console.log('button clicked')
