@@ -16,7 +16,7 @@ const addStudentHandler = async (event) => {
      } 
     
     const password = makePassword(8)//generate random password
-    const is_teacher = false
+    const is_teacher = 0
 
     if (first_name && last_name && email) {
         console.log(first_name , last_name , email , password , is_teacher )
@@ -34,7 +34,7 @@ const addStudentHandler = async (event) => {
     }
 }
 
-//works sometimes
+//works for first line only
 const deleteStudent = async (event) => {
     event.preventDefault();
     console.log('button clicked')
@@ -82,6 +82,7 @@ const viewStudents = async (event) => {
 
 }
 
+//works for first line only
 const updateStudent = async (event) => {
     event.preventDefault();
     console.log('button clicked')

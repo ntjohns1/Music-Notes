@@ -5,9 +5,9 @@ const grabEventData = async (event) => {
     const userStartTime = document.querySelector('#startTime-scheduleLesson').value;
     const studentInfo = document.querySelector('#studentName-scheduleLesson').value;
     const studentName = studentInfo.split(" ")[1] + ' ' + studentInfo.split(" ")[2]
-    const studentId = parseInt(studentInfo.split(" ")[0])
-    //const teacherId = document.querySelector('#teacherId-scheduleLesson').value;
-    const teacher_name = 'teacher_name' //req.session.full_name
+    const studentId = parseInt(studentInfo.split(" ")[0]) 
+
+    const teacher_name = localStorage.getItem('fullName')
     const description = `${studentName}'s Lesson with ${teacher_name}`
     const summary = `${studentName}'s Lesson with ${teacher_name}`
     
