@@ -1,6 +1,6 @@
 const addStudentHandler = async (event) => {
     event.preventDefault();
-    console.log('button clicked')
+
     const first_name = document.querySelector('#firstName-createStudent').value.trim();
     const last_name = document.querySelector('#lastName-createStudent').value.trim();
     const email = document.querySelector('#email-createStudent').value.trim();
@@ -37,26 +37,23 @@ const addStudentHandler = async (event) => {
 //works for first line only
 const deleteStudent = async (event) => {
     event.preventDefault();
-    console.log('delete button clicked');
 
-    const studentId = $(this).parent
-    console.log(this)
-    console.log(studentId);
+    const studentId = document.querySelector(".delete-student-btn").value
 
-    // if (studentId) {
-    //     const id = studentId;
+    if (studentId) {
+        const id = studentId;
     
-    //     const response = await fetch(`/api/student/${id}`, {
-    //       method: 'DELETE',
-    //     });
+        const response = await fetch(`/api/student/${id}`, {
+          method: 'DELETE',
+        });
     
-    //     if (response.ok) {
-    //       console.log("student deleted");
-    //       document.location.replace('/students');
-    //     } else {
-    //       alert('Failed');
-    //     }
-    //   }
+        if (response.ok) {
+          alert("Student successfully deleted");
+          document.location.replace('/students');
+        } else {
+          alert('Failed');
+        }
+      }
     
 }
 
@@ -87,15 +84,13 @@ const viewStudents = async (event) => {
 //works for first line only
 const updateStudent = async (event) => {
     event.preventDefault();
-    console.log('button clicked')
     
-    const studentId = document.querySelector('#delete-student-btn').value
+    const studentId = document.querySelector('.update-student-btn').value
     
-    console.log(studentId);
 
-    const first_name = document.querySelector('#update-firstname').value.trim();
-    const last_name = document.querySelector('#update-lastname').value.trim();
-    const email = document.querySelector('#update-email').value.trim();
+    const first_name = document.querySelector('.update-firstname').value.trim();
+    const last_name = document.querySelector('.update-lastname').value.trim();
+    const email = document.querySelector('.update-email').value.trim();
 
     if (studentId) {
         const id = studentId;
@@ -121,17 +116,14 @@ const updateStudent = async (event) => {
       }
 }
 
-// $('.add-student-form').submit(addStudentHandler)
-$(document).on('click', '.delete-student-btn', deleteStudent);
-// $(document).on('click', '.update-student-btn', updateStudent);
 
 document
   .querySelector('.add-student-form')
   .addEventListener('submit', addStudentHandler);
 
-// document
-//   .querySelector('.delete-student-btn')
-//   .addEventListener('click', deleteStudent);
+document
+  .querySelector('.delete-student-btn')
+  .addEventListener('click', deleteStudent);
 
 document
   .querySelector('.update-student-btn')
