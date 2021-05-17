@@ -44,33 +44,38 @@
             <textarea class="form-control" id="commentTextarea" rows="3"></textarea>
             <button id="addCommentBtn" type="submit" class="btn btn-info">SEND</button>
         </div>
-        <div id="manageComments" class="card-body">
-          <table>
-              <thead>
-                  <tr>
-                  <th scope="col"></th>
-                  <th scope="col">Comment</th>
-                  <th scope="col"></th>
-                  <th scope="col"></th>
-                  </tr>
-              </thead>
-              <tbody>
-              {{#each comments as |comment|}}
-                  <tr>
-                      <th scope="row">{{comment.id}}</th>
-                      <td><textarea id="pastCommentTxt" class="form-control">{{comment.date}}: {{comment.content}}</textarea>
-                      </td>
-                      <td><button id="editBtn" class="btn btn-info" value={{comment.id}} type="button">EDIT</button>
-                      </td>
-                      <td><button id="deleteBtn" class="btn btn-danger" value={{comment.id}} type="button">DELETE</button>
-                      </td>
-                  </tr>
-              {{/each}}
-              </tbody>
-           </table>
-      </div>
-<script src="./js/comment.js"></script>
-<!--
+        <div class="card p-4 m-4">
+            <div id="manageComments" class="card-body">
+                <table>
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Comment</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each comments as |comment|}}
+                        <tr>
+                            <th scope="row">{{comment.id}}</th>
+                            <td><textarea id="pastCommentTxt"
+                                    class="form-control">{{comment.date}}: {{comment.content}}</textarea>
+                            </td>
+                            <td><button id="editBtn" class="btn btn-info" value={{comment.id}}
+                                    type="button">EDIT</button>
+                            </td>
+                            <td><button id="deleteBtn" class="btn btn-danger" value={{comment.id}}
+                                    type="button">DELETE</button>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <script src="./js/comment.js"></script>
+        <!--
     When the route for this page is hit, we can send along the list of students. that will be used to populate the drop down. to view all existing students.
     User can then select a student…the page script will then fetch the comments for that student. and populate the UI
     The UI will allow the user to edit a comment..on edit of that comment a put request will be sent to update that comment.

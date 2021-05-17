@@ -1,4 +1,4 @@
-const grabEventData = async (event) => {
+const createEventHandler = async (event) => {
     event.preventDefault();
 
     const pickedDate = document.querySelector('#datepicker').value
@@ -28,7 +28,8 @@ const grabEventData = async (event) => {
             headers: { 'Content-Type': 'application/json' },
         })
         if(response.ok) {
-             document.location.replace('/schedule');
+            alert(`You have successfully scheduled ${studentName}'s lesson for ${pickedDate} at ${hour}:00.`)
+            document.location.replace('/schedule');
          } else {
              alert('Failed to schedule event')// change to a modal
         }
@@ -39,4 +40,4 @@ const grabEventData = async (event) => {
 
 document
     .querySelector('.scheduleLessonForm')
-    .addEventListener('submit', grabEventData)
+    .addEventListener('submit', createEventHandler)
