@@ -36,7 +36,7 @@ User.init(
             validate: {
                 len: 8,
                 isAlphanumeric: true,
-                is: /.*[0-9].*/gm, //check to make sure the password contains a number
+                is: /.*[0-9].*/gm,
             },
         },
         email: {
@@ -48,7 +48,6 @@ User.init(
         },
         is_teacher: {
             type: DataTypes.TINYINT,
-            //defaultValue: false,
         },
     },
     {

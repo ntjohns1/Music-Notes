@@ -10,7 +10,6 @@ router.post('/signup', async (req, res) => {
       password: req.body.password,
       is_teacher: req.body.is_teacher,
     });
-    console.log(userData)
 
     req.session.save(() => {
       req.session.user_id = userData.id;
@@ -33,7 +32,6 @@ router.post('/login', async (req, res) => {
     }
 
     const validPassword = await userData.checkPassword(req.body.password);
-    console.log(validPassword)
     if (!validPassword) {
       res
         .status(400)
@@ -46,7 +44,6 @@ router.post('/login', async (req, res) => {
       req.session.logged_in = true;
       
       res.json({ user: userData, message: 'You are now logged in!' });
-      //find a way to exclude the password from being sent back to the front end
     });
 
   } catch (err) {
@@ -55,7 +52,6 @@ router.post('/login', async (req, res) => {
 });
 
 router.post('/logout', (req, res) => {
-  console.log('logout route hit')
   if (req.session.logged_in) {
     req.session.destroy(() => {
       res.status(204).end();

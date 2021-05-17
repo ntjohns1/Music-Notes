@@ -1,5 +1,4 @@
 <div class="bg-light p-3">
-    <!--Portal Nav-->
     <div class>
         <ul class="nav nav-tabs">
             <li class="nav-item">
@@ -15,83 +14,64 @@
                 <a class="nav-link text-black-50" href="/calendar">Calendar</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-black-50" href="/comments" > Lesson Comments</a>
+                <a class="nav-link text-black-50" href="/comments"> Lesson Comments</a>
             </li>
         </ul>
     </div>
 
-    <!--Portal Content-->
     <div class="my-4">
         <h3>Welcome to Schedule Management!</h3>
-            <!--Get Students target select with id and append sibling to the first option??--> 
-            <div class="card p-4 m-4">
-                <div class="card-header">
-                    <h3>Schedule a Lesson</h3>
-                </div>
-                <div class="card-body"></div>
-                    <form class="form scheduleLessonForm">
-                        <div class="form-group">
-                            <label for="studentName-scheduleLesson" class="form-label">Student Name: </label>
-                            <select class="form-select" aria-label="studentName-scheduleLesson" id="studentName-scheduleLesson">
-                                <option selected>Select a Student</option>
-                                {{#each students as |user|}}
-                                    <option>{{user.id}} {{user.first_name}} {{user.last_name}}</option>
-                                {{/each}}
-                            </select>
-                        </div>
-
-                    <div class="form-group">
-                        <label for="date-scheduleLesson" class="form-label">Select Date: </label>
-                        <input id="datepicker" width="276" />
-                        <script>
-                            $('#datepicker').datepicker({
-                                uiLibrary: 'bootstrap4'
-                            });
-                        </script>
-                    </div>    
-                    
-                    <div class="form-group">
-                        <label for="startTime-scheduleLesson" class="form-label">Select Time: </label>
-                        <select class="form-select p-2 m-3" aria-label="startTime-scheduleLesson" id="startTime-scheduleLesson">
-                            <option selected>Select Time</option>
-                                <option value="10">10:00am</option> <!--Grab the student id from the value-->
-                                <option value="11">11:00am</option>
-                                <option value="12">12:00am</option>
-                                <option value="13">1:00pm</option>
-                                <option value="14">2:00pm</option>
-                                <option value="15">3:00pm</option>
-                                <option value="16">4:00pm</option>
-                                <option value="17">5:00pm</option>
-                                <option value="18">6:00pm</option>
-
-                        </select>
-                            </div>
-
-                    {{!-- <div class="mb-3">
-                        <label for="description-scheduleLesson" class="form-label">Description</label>
-                        <input type="text" class="form-control" id="description-scheduleLesson" placeholder="(student name) lesson with (teacher name).">
-                    </div> --}}
-
-
-                    <div class="form-group">
-                        <button class="btn btn-secondary" type="submit">Schedule Lesson</button>
-                    </div>
-                    <!--Event model: id, year, month, day, hour, minute, summary, description, student id, teacher id, calender id-->
-
-                    </form>
+        <div class="card p-4 m-4">
+            <div class="card-header">
+                <h3>Schedule a Lesson</h3>
             </div>
-            <!-- We need a form or series of forms that can do the following things:
-            Drop down list of existing students:  STUDENT NAMES (get req)
-            View existing lessons: get req
-            Add a lesson for selected student: post req
-            Change an existing lesson: put req
-            Cancel a lesson: delete req
+            <div class="card-body"></div>
+            <form class="form scheduleLessonForm">
+                <div class="form-group">
+                    <label for="studentName-scheduleLesson" class="form-label">Student Name: </label>
+                    <select class="form-select" aria-label="studentName-scheduleLesson" id="studentName-scheduleLesson">
+                        <option selected>Select a Student</option>
+                        {{#each students as |user|}}
+                        <option>{{user.id}} {{user.first_name}} {{user.last_name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
 
-            We also need a javascript to manage the event listener action
-            -->
+                <div class="form-group">
+                    <label for="date-scheduleLesson" class="form-label">Select Date: </label>
+                    <input id="datepicker" width="276" />
+                    <script>
+                        $('#datepicker').datepicker({
+                            uiLibrary: 'bootstrap4'
+                        });
+                    </script>
+                </div>
 
+                <div class="form-group">
+                    <label for="startTime-scheduleLesson" class="form-label">Select Time: </label>
+                    <select class="form-select p-2 m-3" aria-label="startTime-scheduleLesson"
+                        id="startTime-scheduleLesson">
+                        <option selected>Select Time</option>
+                        <option value="10">10:00am</option>
+                        <option value="11">11:00am</option>
+                        <option value="12">12:00am</option>
+                        <option value="13">1:00pm</option>
+                        <option value="14">2:00pm</option>
+                        <option value="15">3:00pm</option>
+                        <option value="16">4:00pm</option>
+                        <option value="17">5:00pm</option>
+                        <option value="18">6:00pm</option>
+
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-secondary" type="submit">Schedule Lesson</button>
+                </div>
+
+            </form>
+        </div>
     </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="./js/schedule.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="./js/schedule.js"></script>
 </div>
-
