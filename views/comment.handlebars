@@ -21,15 +21,6 @@
     <!--Portal Content-->
     <div class="my-4">
         <h3>Welcome to Comment Management!</h3>
-        <!-- We need a form or series of forms that can do the following things:
-                Drop down list of existing students:  STUDENT NAMES (get req)
-                Add a comment for selected student: post req
-
-                View History of comments: get req
-                Edit an existing comment: put req
-                Delete a comment: delete req
-            -->
-        {{!-- helper to populates a list of users (need to figure out how to limit to isTeacher: false) --}}
         <select id="userSelect" class="form-select" aria-label="Select a Student">
             {{#each students as |user|}}
             <option value="{{user.id}}">
