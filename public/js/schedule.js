@@ -3,11 +3,13 @@ const grabEventData = async (event) => {
 
     const pickedDate = document.querySelector('#datepicker').value
     const userStartTime = document.querySelector('#startTime-scheduleLesson').value;
-    const studentName = document.querySelector('#studentName-scheduleLesson').value
-    //const studentId = document.querySelector('#studentId-scheduleLesson').value;
+    const studentInfo = document.querySelector('#studentName-scheduleLesson').value;
+    const studentName = studentInfo.split(" ")[1] + ' ' + studentInfo.split(" ")[2]
+    const studentId = parseInt(studentInfo.split(" ")[0])
     //const teacherId = document.querySelector('#teacherId-scheduleLesson').value;
-    const description = `${studentName}'s Lesson with Mr. Music Teacher`
-    const summary = `${studentName}'s Lesson with Mr. Music Teacher`
+    const teacher_name = 'teacher_name' //req.session.full_name
+    const description = `${studentName}'s Lesson with ${teacher_name}`
+    const summary = `${studentName}'s Lesson with ${teacher_name}`
     
     const month = parseInt(pickedDate.split("/")[0]);
     const day = parseInt(pickedDate.split("/")[1]);
@@ -18,9 +20,11 @@ const grabEventData = async (event) => {
     //fectch request through api route!
     if(pickedDate && hour && summary) {
         console.log(`month ${month} day ${day} year ${year} hour ${hour} summary ${summary}`)
+        console.log(studentInfo)
+        console.log(`studentName ${studentName} studentId ${studentId}`)
         const response = await fetch('/api/events/', {
             method: 'POST',
-            body: JSON.stringify({ year, month, day, hour, summary, description }),
+            body: JSON.stringify({ year, month, day, hour, summary, description, studentId }),
             headers: { 'Content-Type': 'application/json' },
         })
         if(response.ok) {
