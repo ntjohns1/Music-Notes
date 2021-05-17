@@ -34,19 +34,10 @@
                             <label for="studentName-scheduleLesson" class="form-label">Student Name: </label>
                             <select class="form-select" aria-label="studentName-scheduleLesson" id="studentName-scheduleLesson">
                                 <option selected>Select a Student</option>
-                                {{#each students as |user|}} <!--review gallery activity-->
-                                    <option value="{{user.id}}">{{user.first_name}} {{user.last_name}}</option> <!--Grab the student id from the value-->
+                                {{#each students as |user|}}
+                                    <option>{{user.id}} {{user.first_name}} {{user.last_name}}</option>
                                 {{/each}}
                             </select>
-                            <script>
-                                const test = document.querySelector('#studentName-scheduleLesson')
-                                test.addEventListener('change', e => {
-                                    console.log('e.target.value==>>', e.target.value)
-                                    const selectedStudent = e.target.value
-                                    console.log('selectedStudent', selectedStudent)
-                                    return selectedStudent
-                                })
-                            </script>
                         </div>
 
                     <div class="form-group">
@@ -65,7 +56,14 @@
                             <option selected>Select Time</option>
                                 <option value="10">10:00am</option> <!--Grab the student id from the value-->
                                 <option value="11">11:00am</option>
+                                <option value="12">12:00am</option>
+                                <option value="13">1:00pm</option>
                                 <option value="14">2:00pm</option>
+                                <option value="15">3:00pm</option>
+                                <option value="16">4:00pm</option>
+                                <option value="17">5:00pm</option>
+                                <option value="18">6:00pm</option>
+
                         </select>
                             </div>
 
@@ -93,6 +91,7 @@
             -->
 
     </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="./js/schedule.js"></script>
 </div>
 

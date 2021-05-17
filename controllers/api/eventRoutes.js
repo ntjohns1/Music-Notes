@@ -33,7 +33,15 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        const userEvent = await Event.create(req.body);
+        const userEvent = await Event.create({
+            year: req.body.year,
+            month: req.body.month,
+            day: req.body.day,
+            hour: req.body.hour,
+            summary: req.body.summary,
+            description: req.body.description,
+            user_id: req.body.studentId,
+        });
         res.status(200).json(userEvent);
     } catch (err) {
         res.status(400).json(err);

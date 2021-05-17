@@ -48,15 +48,6 @@ router.get('/signup', async (req, res) => {
     }
 })
 
-router.get('/calendar', async (req, res) => {
-  if(req.session.logged_in) {
-      res.render('calendar')
-  } else{
-      res.render('login')
-
-  }
-})
-
 router.get('/students', async (req, res) => {
     if (req.session.logged_in) {
       const userData = await User.findAll().catch((err) => {
@@ -86,14 +77,14 @@ router.get('/schedule', async (req, res) => {
     res.render('login');
 });
 
-router.get('/logout', async (req, res) => {
-  if (req.session.logged_in) {
-    res.render('portal')
-    return;
-  }
+router.get('/calendar', async (req, res) => {
+  if(req.session.logged_in) {
+      res.render('calendar')
+  } else{
+      res.render('login')
 
-  res.render('homepage');
-});
+  }
+})
 
 router.get('/comments', async (req, res) => {
   const userData = await User.findAll().catch((err) => {

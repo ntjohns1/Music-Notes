@@ -48,11 +48,11 @@
                             {{#each students as |user|}}
                             <tr>
                                 <th scope="row">{{user.id}}</th>
-                                <td>{{user.first_name}}</td>
-                                <td>{{user.last_name}}</td>
-                                <td>{{user.email}}</td>
-                                <td><button class="btn btn-secondary" value={{user.id}} type="submit">Update</button></td>
-                                <td><button class="btn btn-secondary" value={{user.id}} type="submit" id="delete-student-btn">Delete</button></td>
+                                <td><textarea id="update-firstname">{{user.first_name}}</textarea></td>
+                                <td><textarea id="update-lastname">{{user.last_name}}</textarea></td>
+                                <td><textarea id="update-email">{{user.email}}</textarea></td>
+                                <td><button class="btn btn-info" value="{{user.id}}" type="submit" id="update-student-btn">Update</button></td>
+                                <td><button class="btn btn-danger" value="{{user.id}}" type="submit" id="delete-student-btn">Delete</button></td>
                             </tr>
                             {{/each}}
 
@@ -98,8 +98,8 @@
             </div>
 
     </div>
-    
-
 
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="./js/students.js"></script>
