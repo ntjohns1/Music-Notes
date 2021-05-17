@@ -92,14 +92,14 @@ const editComment = async (event) => {
 }
 
 document
-    .querySelector('#deleteBtn')
-    .addEventListener('click', deleteComment)
+.querySelector('#userSelectBtn')
+.addEventListener('click', selectStudent);
 document
-    .querySelector('#editBtn')
-    .addEventListener('click', editComment)
+.querySelector('#addCommentBtn')
+.addEventListener('click', addComment);
 document
-    .querySelector('#addCommentBtn')
-    .addEventListener('click', addComment);
+.querySelector('#deleteBtn')
+.addEventListener('click', deleteComment);
 document
-    .querySelector('#userSelectBtn')
-    .addEventListener('click', selectStudent);
+.querySelector('#editBtn')
+.addEventListener('click', editComment);
