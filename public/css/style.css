@@ -2,7 +2,7 @@
   /* CARDS */
 .calendar-card {
     margin: 20px;
-    flex: 0 1 300px;
+    flex: 1 1 300px;
   }
 
 .calendar-card-header {
@@ -21,4 +21,5 @@
     flex-flow: column wrap;
     align-items: center;
     width: 100%;
+    justify-content: center;
   }
