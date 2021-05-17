@@ -36,9 +36,8 @@ Calendar data ia managed using the [Google Calendar API](https://developers.goog
   * The new student user data will be sent to the database and an automatically generated password will be populated in the database.
   * The student management page will reload and the list of current students will then update with the new student.
   * The student management page will reload and the list of current students includes an "update" button and a "delete" button.
-  * Teacher can update student name fields and email fields. When teacher clicks on "update" the page will refresh with updated user data.
-  * When teacher clicks "delete" the student list will automatically update with the selected student removed.
-  * The student user data will also be removed from the database.
+  * Teacher can update student name fields and email fields. When teacher clicks on "update" the page will refresh with updated user data AND the database is also update.
+  * When teacher clicks "delete" the student is removed from page and database.
 * When teacher clicks the "Manage Calendar" link, the scheduling page will load with a form to schedule a lesson.
   * When form is submited, the data is then sent to the users calendar using the Google Calendar API.
 * When teacher clicks on the "Calendar" link their calendar is displayed.
@@ -51,9 +50,9 @@ Calendar data ia managed using the [Google Calendar API](https://developers.goog
 
 
 ### Future Developments
-* Student view and a teacher view
-* Delete events that will delete from Google API and our own database
-* Invoicing
+* Inclusion of student view
+* Invoicing functionality
+* Payment functionality
 * Emailing
 
 ---
