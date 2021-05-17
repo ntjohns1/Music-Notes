@@ -2,7 +2,9 @@
 // add submit button under text area that calls addComment, format inputs to match 
 // **set attribute hidden back to false for text area and comment history
 // page script needs to fetch the comments for that student and populate the UI with them (id=commentHistory)
-// add event listeners to edit and delete buttons on comment history
+// filter the comments where user id we grabbed === Comment.student_id
+// create the elements using the bootstrap components on lines 53 through 61 of the comment.handlebars file
+// populate text areas with comment history
 const selectStudent = async (event) => {
     event.preventDefault();
     const student = document.querySelector('#userSelect').value;
@@ -33,9 +35,6 @@ const selectStudent = async (event) => {
         alert(response.statusText);
     };
 }
-// filter the comments where user id we grabbed === Comment.student_id
-// create the elements using the bootstrap components on lines 53 through 61 of the comment.handlebars file
-// populate text areas with comment history
 
 const addComment = async (event) => {
     event.preventDefault();
@@ -72,10 +71,32 @@ const commentId = document.querySelector('#deleteBtn').value
       }    
 }
 
+const editComment = async (event) => {
+    event.preventDefault();
+    const id = document.querySelector('#editBtn').value;
+    const date = moment().format('YYYY-MM-DD');
+    const content = document.querySelector('#pastCommentTxt').value.trim();
+    if ( id && content) {
+        const response = await fetch(`/api/comment/${id}`, {
+            method: 'PUT',
+            body: JSON.stringify({ id, date, content }),
+            headers: { 'Content-Type': 'application/json' },
+        })
+        if (response.ok) {
+            document.location.replace('/comments');
+            console.log(content);
+        } else {
+            alert('Failed to add comment')// change to a modal
+        }
+    }
+}
+
 document
     .querySelector('#deleteBtn')
     .addEventListener('click', deleteComment)
-
+document
+    .querySelector('#editBtn')
+    .addEventListener('click', editComment)
 document
     .querySelector('#addCommentBtn')
     .addEventListener('click', addComment);

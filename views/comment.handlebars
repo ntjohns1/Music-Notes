@@ -58,7 +58,7 @@
               {{#each comments as |comment|}}
                   <tr>
                       <th scope="row">{{comment.id}}</th>
-                      <td><textarea class="form-control">{{comment.date}}: {{comment.content}}</textarea>
+                      <td><textarea id="pastCommentTxt" class="form-control">{{comment.date}}: {{comment.content}}</textarea>
                       </td>
                       <td><button id="editBtn" class="btn btn-info" value={{comment.id}} type="button">EDIT</button>
                       </td>
