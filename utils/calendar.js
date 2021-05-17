@@ -3,7 +3,6 @@ require('dotenv').config();
 const { QueryTypes } = require('sequelize');
 const Sequelize = require('sequelize');
 const axios = require('axios').default;
-// const fetch = require('node-fetch');
 
 var sequelize = new Sequelize(
     process.env.DB_NAME,
@@ -149,22 +148,11 @@ function getNewCalendarId(newEvent) {
 
 function saveCalendarId(calendar_id) {
     const inputId = async (id) => {
-        // const response = await fetch(`http://localhost:3001/api/events/${id}`, {
-        //     method: 'PUT',
-        //     body: JSON.stringify({ calendar_id: calendar_id }),
-        //     headers: { 'Content-Type': 'application/json' },
-        // });
-
-        console.log("hitting save")
-
         axios.put(
             `http://localhost:3001/api/events/${id}`,
             JSON.stringify({ calendar_id: calendar_id }),
             { headers: {'Content-Type': 'application/json'} },
         )
-        .then(function (response) {
-            console.log("Complete!")
-        })
 
     };
 
@@ -205,19 +193,5 @@ function deleteEvent(eventId) {
             console.log(err);
         });
 };
-
-function testFunction () {
-    const getUsers = async () => {
-        const results = await sequelize.query('SELECT user.id, user.is_teacher, CONCAT (user.first_name, " ", user.last_name) AS name FROM user', { type: QueryTypes.SELECT });
-        const student = results.filter(teacher => teacher.is_teacher == 0);
-
-        student.forEach(({ name }) => {
-            console.log(name );
-        });
-      };
-      getUsers(); 
-};
-
-// testFunction();
 
 module.exports = { insertNewEvent, deleteEvent };

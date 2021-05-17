@@ -17,7 +17,7 @@ const signUpFormHandler = async (event) => {
             alert('You have successfully signed up!\nPlease log in to begin using Music Notes')
             document.location.replace('/login');
         } else {
-            alert('Failed to sign up')// change to a modal?
+            alert('Failed to sign up')
         }
     }
 }

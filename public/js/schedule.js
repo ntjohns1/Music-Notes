@@ -17,7 +17,6 @@ const createEventHandler = async (event) => {
     const hour = parseInt(userStartTime)
 
     
-    //fectch request through api route!
     if(pickedDate && hour && summary) {
         console.log(`month ${month} day ${day} year ${year} hour ${hour} summary ${summary}`)
         console.log(studentInfo)
@@ -31,7 +30,7 @@ const createEventHandler = async (event) => {
             alert(`You have successfully scheduled ${studentName}'s lesson for ${pickedDate} at ${hour}:00.`)
             document.location.replace('/schedule');
          } else {
-             alert('Failed to schedule event')// change to a modal
+             alert('Failed to schedule event')
         }
 
     }

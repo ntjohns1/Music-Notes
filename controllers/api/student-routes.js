@@ -2,26 +2,18 @@ const router = require('express').Router();
 const { User } = require('../../models');
 
 router.get('/', async (req, res) => {
-    console.log('route hit')
     try {
         const userStudent = await User.findAll({
-            //include: [{ model: Comment }],
         });
-        //const users = userStudent.map((user) => user.get({plain: true}))
-        //res.render('students', {users})
         res.status(200).json(userStudent);
     } catch (err) {
         res.status(500).json(err);
     }
 });
 router.get('/comments', async (req, res) => {
-    console.log('route hit')
     try {
         const user = await User.findAll({
-            //include: [{ model: Comment }],
         });
-        //const users = userStudent.map((user) => user.get({plain: true}))
-        //res.render('students', {users}) 
         res.status(200).json(user);
     } catch (err) {
         res.status(500).json(err);
@@ -46,8 +38,6 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    console.log('route hit')
-
     try {
         const userData = await User.create({
             first_name: req.body.first_name,
@@ -56,7 +46,6 @@ router.post('/', async (req, res) => {
             password: req.body.password,
             is_teacher: req.body.is_teacher,
         });
-        console.log('user created')
         res.status(200).json(userData);
     } catch (err) {
         res.status(400).json(err);
