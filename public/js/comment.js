@@ -13,9 +13,14 @@ const selectStudent = async (event) => {
 
 const addComment = async (event) => {
     event.preventDefault();
+
     const date = moment().format('YYYY-MM-DD');
-    const content = document.querySelector('#commentTextarea').value.trim();
-    const user_id = document.querySelector('#userSelect').value;
+    const studentInfo = document.querySelector('#userSelect').value;
+    const studentName = studentInfo.split(" ")[1] + ' ' + studentInfo.split(" ")[2]
+    const commentText = document.querySelector('#commentTextarea').value.trim();
+    const content = `${commentText} (${studentName})`
+    const user_id = parseInt(studentInfo.split(" ")[0]) 
+
     if (date && content && user_id) {
         const response = await fetch('/api/comment', {
             method: 'POST',
@@ -30,9 +35,10 @@ const addComment = async (event) => {
     }
 }
 
-const deleteComment = async (event) => {
+async function deleteComment(event) {
     event.preventDefault();
-const commentId = document.querySelector('#deleteBtn').value
+    const commentId = $(this).val()
+
     if (commentId) {
         const id = commentId;
         const response = await fetch(`/api/comment/${id}`, {
@@ -46,11 +52,14 @@ const commentId = document.querySelector('#deleteBtn').value
       }    
 }
 
-const editComment = async (event) => {
+async function editComment(event) {
     event.preventDefault();
-    const id = document.querySelector('#editBtn').value;
+
+    const id = $(this).val()
     const date = moment().format('YYYY-MM-DD');
-    const content = document.querySelector('#pastCommentTxt').value.trim();
+    const content = $(this).closest('tr').children().eq(1).children().val().trim()
+    
+
     if ( id && content) {
         const response = await fetch(`/api/comment/${id}`, {
             method: 'PUT',
@@ -71,9 +80,6 @@ document
 document
 .querySelector('#addCommentBtn')
 .addEventListener('click', addComment);
-document
-.querySelector('#deleteBtn')
-.addEventListener('click', deleteComment);
-document
-.querySelector('#editBtn')
-.addEventListener('click', editComment);
+
+$(document).on('click', '#deleteBtn', deleteComment);
+$(document).on('click', '#editBtn', editComment)
