@@ -15,7 +15,7 @@ const addStudentHandler = async (event) => {
         return generatedPassword;
      } 
     
-    const password = makePassword(8)
+    const password = makePassword(7)+'8'
     const is_teacher = 0
 
     if (first_name && last_name && email) {
