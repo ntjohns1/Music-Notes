@@ -21,7 +21,7 @@ const signUpFormHandler = async (event) => {
 
             localStorage.setItem('fullName', userFullName)
 
-            alert('You have successfully signed up!\nPlease log in to begin using Music Notes')
+            alert('You have successfully signed up!')
             document.location.replace('/portal');
         } else {
             alert('Failed to sign up')

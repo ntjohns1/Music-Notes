@@ -1,100 +1,101 @@
 const router = require('express').Router();
 const { User, Comment } = require('../models');
-const withAuth = require('../utils/auth');
 
-router.get('/', withAuth, async (req, res) => {
-  try {
+router.get('/', async (req, res) => {
+  if (req.session.logged_in) {
     res.render('portal')
-  } catch (error) {
+  } else {
     res.render('homepage')
+
   }
 })
 
-router.get('/login', withAuth, async (req, res) => {
-  try {
+router.get('/login', async (req, res) => {
+  if (req.session.logged_in) {
+
     res.render('portal')
-  } catch (error) {
-    res.render('login');
+    return;
   }
+
+  res.render('login');
 });
 
-router.get('/signup', withAuth, async (req, res) => {
-  try {
-    res.render('portal')
-  } catch (error) {
-    res.render('signup');
-  }
-});
-
-router.get('/logout', withAuth, async (req, res) => {
-  try {
-    res.render('portal')
-  } catch (error) {
-    res.render('homepage')
-  }
-});
-
-router.get('/portal', withAuth, async (req, res) => {
-  try {
-    res.render('portal')
-  } catch (error) {
-    res.render('login')
-  }
-})
-
-router.get('/students', withAuth, async (req, res) => {
-  try {
-    const userData = await User.findAll().catch((err) => {
-      res.json(err);
-    });
-    const users = userData.map((user) => user.get({ plain: true }));
-    const students = users.filter(teacher => teacher.is_teacher == 0);
-
-    res.render('students', { students });
-
-  } catch (error) {
-    res.render('login');
-  }
-});
-
-router.get('/schedule', withAuth, async (req, res) => {
-  try {
-    const userData = await User.findAll().catch((err) => {
-      res.json(err);
-    });
-    const users = userData.map((user) => user.get({ plain: true }));
-    const students = users.filter(teacher => teacher.is_teacher == 0);
-    res.render('schedule', { students });
-
-  } catch (error) {
-    res.render('login');
-  }
-});
-
-router.get('/calendar', withAuth, async (req, res) => {
-  try {
-    res.render('calendar')
-  } catch (error) {
-    res.render('login')
-  }
-})
-
-router.get('/comments', withAuth, async (req, res) => {
-  try {
-    const userData = await User.findAll().catch((err) => {
-      res.json(err);
-    });
-    const users = userData.map((user) => user.get({ plain: true }));
-    const commentData = await Comment.findAll().catch((err) => {
-      res.json(err);
-    });
-    const comments = commentData.map((comment) => comment.get({ plain: true }));
-    const students = users.filter(teacher => teacher.is_teacher == 0);
-    res.render('comment', { students, comments });
+router.get('/signup', async (req, res) => {
+    if (req.session.logged_in) {
+      res.render('portal')
+      return;
+    }
   
-  } catch (error) {
-    res.render('login')
+    res.render('signup');
+  });
+
+  router.get('/logout', async (req, res) => {
+    if (req.session.logged_in) {
+      res.render('portal')
+      return;
+    }
+  
+    res.render('homepage');
+  });
+
+  router.get('/portal', async (req, res) => {
+    if(req.session.logged_in) {
+        res.render('portal')
+    } else{
+        res.render('login')
+
+    }
+})
+
+router.get('/students', async (req, res) => {
+    if (req.session.logged_in) {
+      const userData = await User.findAll().catch((err) => {
+        res.json(err);
+      });
+      const users = userData.map((user) => user.get({ plain: true }));
+      const students = users.filter(teacher => teacher.is_teacher == 0);
+      res.render('students', { students });
+  
+        return;
+    } else {
+      res.render('login');
+    }
+});
+
+router.get('/schedule', async (req, res) => {
+    if (req.session.logged_in) {
+      const userData = await User.findAll().catch((err) => {
+        res.json(err);
+      });
+      const users = userData.map((user) => user.get({ plain: true }));
+      const students = users.filter(teacher => teacher.is_teacher == 0);
+      res.render('schedule', { students });
+        return;
+    }
+    
+    res.render('login');
+});
+
+router.get('/calendar', async (req, res) => {
+  if(req.session.logged_in) {
+      res.render('calendar')
+  } else{
+      res.render('login')
+
   }
+})
+
+router.get('/comments', async (req, res) => {
+  const userData = await User.findAll().catch((err) => {
+    res.json(err);
+  });
+  const users = userData.map((user) => user.get({ plain: true }));
+  const commentData = await Comment.findAll().catch((err) => {
+    res.json(err);
+  });
+  const comments = commentData.map((comment) => comment.get({ plain: true }));
+  const students = users.filter(teacher => teacher.is_teacher == 0);
+  res.render('comment', { students, comments });
 });
 
 module.exports = router;

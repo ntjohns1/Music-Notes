@@ -33,10 +33,10 @@ const addStudentHandler = async (event) => {
     }
 }
 
-const deleteStudent = async (event) => {
+async function deleteStudent(event) {
     event.preventDefault();
 
-    const studentId = document.querySelector(".delete-student-btn").value
+    const studentId = $(this).val()
 
     if (studentId) {
         const id = studentId;
@@ -52,7 +52,7 @@ const deleteStudent = async (event) => {
           alert('Failed');
         }
       }
-    
+
 }
 
 const viewStudents = async (event) => {
@@ -79,15 +79,16 @@ const viewStudents = async (event) => {
 
 }
 
-const updateStudent = async (event) => {
+async function updateStudent(event) {
     event.preventDefault();
     
-    const studentId = document.querySelector('.update-student-btn').value
+    const studentId = $(this).val()
     
-
-    const first_name = document.querySelector('.update-firstname').value.trim();
-    const last_name = document.querySelector('.update-lastname').value.trim();
-    const email = document.querySelector('.update-email').value.trim();
+    const first_name = $(this).closest('tr').children().eq(1).children().val()
+    const last_name = $(this).closest('tr').children().eq(2).children().val()
+    const email = $(this).closest('tr').children().eq(3).children().val()
+    
+    console.log(studentId, first_name, last_name, email)
 
     if (studentId) {
         const id = studentId;
@@ -118,10 +119,6 @@ document
   .querySelector('.add-student-form')
   .addEventListener('submit', addStudentHandler);
 
-document
-  .querySelector('.delete-student-btn')
-  .addEventListener('click', deleteStudent);
+$(document).on('click', '.delete-student-btn', deleteStudent)
 
-document
-  .querySelector('.update-student-btn')
-  .addEventListener('click', updateStudent);
+$(document).on('click', '.update-student-btn', updateStudent)
