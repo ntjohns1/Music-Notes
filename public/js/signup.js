@@ -14,8 +14,15 @@ const signUpFormHandler = async (event) => {
             headers: { 'Content-Type': 'application/json' },
         })
         if(response.ok) {
+            const data = await response.json();
+            const first_name = data.first_name
+            const last_name = data.last_name
+            const userFullName = `${first_name} ${last_name}`
+
+            localStorage.setItem('fullName', userFullName)
+
             alert('You have successfully signed up!\nPlease log in to begin using Music Notes')
-            document.location.replace('/login');
+            document.location.replace('/portal');
         } else {
             alert('Failed to sign up')
         }
