@@ -24,9 +24,10 @@ const selectStudent = async (event) => {
     // };
     // document.querySelector('#userSelect').setAttribute('hidden', true);
     // document.querySelector('#manageComments').removeAttribute('hidden');
-    const response = await fetch(`/api/comment/`, {
+    const response = await fetch(`/api/comment`, {
         method: 'GET',
     });
+    console.log(response.body);
     if (response.ok) {
         // console.log(JSON.stringify(response.body));
         console.log(JSON.stringify(response));

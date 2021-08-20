@@ -3,10 +3,12 @@ const { User, Comment } = require('../../models');
 
 
 router.get('/', async (req, res) => {
+    console.log("route hit");
     try {
         const userComment = await Comment.findAll({
             include: [{ model: User }],
         });
+        console.log(userComment);
         res.status(200).json(userComment);
     } catch (err) {
         res.status(500).json(err);
